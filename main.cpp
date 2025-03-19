@@ -1,15 +1,17 @@
 #include "raylib.h"
 #include <iostream>
+#include "player.h"
+#include "obstacle.h"
 using namespace std;
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
-void DrawBackground()
+void DrawBackground(Obstacle obstacles[], int size)
 {
-    // Draw rectangualar obstacles in the sky
-    DrawRectangle(500, 350, 100, 50, DARKGRAY);
-    DrawRectangle(300, 350, 150, 50, DARKGRAY);
-    DrawRectangle(100, 300, 100, 50, DARKGRAY);
+    for (int i = 0; i < size; i++)
+    {
+        obstacles[i].Draw();
+    }
 }
 
 
@@ -46,13 +48,38 @@ CollisionDirection CheckCollisionRecsDirection(Rectangle rec1, Rectangle rec2)
     return NONE;
 }
 
-void playerCollision(Rectangle playerRect, Rectangle obstacleRect)
+void CheckForCollisions(Player& player, Obstacle obstacles[], int size)
 {
-    if (CheckCollisionRecsDirection(playerRect, obstacleRect) != NONE)
+    for (int i = 0; i < size; i++)
     {
-        cout << "Collision detected!" << endl;
+        if (CheckCollisionRecsDirection(player.GetRectangle(), obstacles[i].GetRectangle()) != NONE)
+        {
+            CollisionDirection collision = CheckCollisionRecsDirection(player.GetRectangle(), obstacles[i].GetRectangle());
+            if (collision == 1)
+            {
+                player.position.y = obstacles[i].position.y - player.size.y;
+                player.isJumping = false;
+                player.playerVelocityY = 0.0f;
+            }
+            else if (collision == 2)
+            {
+                player.position.y = obstacles[i].position.y + obstacles[i].size.y;
+                player.isJumping = false;
+                player.playerVelocityY = 0.0f;
+            }
+            else if (collision == 3)
+            {
+                player.position.x = obstacles[i].position.x - player.size.x;
+            }
+            else if (collision == 4)
+            {
+                player.position.x = obstacles[i].position.x + obstacles[i].size.x;
+            }
+        }
     }
 }
+
+
 int main(void)
 {
     // Initialization
@@ -60,16 +87,14 @@ int main(void)
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-    // World constants
-    int gravity = 2.0f;
-    float jumpVelocity = -30.0f;
-    bool isJumping = false;
-    bool topCollision = false;
+    Player player1({0, (float)screenHeight}, {80, 80}, 5.0f, 2.0f, -30.0f);
 
-    int playerSpeed = 5.0f;
-    float playerVelocityY = 0.0f;
-    Vector2 playerPosition = { 0, (float)screenHeight};
-    Vector2 playerSize = { 80, 80 };
+    Obstacle obsticles[3] = {
+        Obstacle({500, 350}, {100, 50}),
+        Obstacle({300, 350}, {150, 50}),
+        Obstacle({100, 300}, {100, 50})
+    };
+    int obstacleCount = sizeof(obsticles) / sizeof(obsticles[0]);
 
     InitWindow(screenWidth, screenHeight, "MegaMan Example");
 
@@ -82,130 +107,8 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) playerPosition.x += playerSpeed;
-        if (IsKeyDown(KEY_LEFT)|| IsKeyDown(KEY_A)) playerPosition.x -= playerSpeed;
-
-
-        // Collision detection with screen edges
-        if (playerPosition.x < 0) playerPosition.x = 0;
-        if (playerPosition.x > screenWidth - playerSize.x) playerPosition.x = screenWidth - playerSize.x;
-        if (playerPosition.y < 0) playerPosition.y = 0;
-        if (playerPosition.y > screenHeight - playerSize.y) playerPosition.y = screenHeight - playerSize.y;
-        if (playerPosition.y + playerSize.y >= screenHeight)
-        {
-            playerPosition.y = screenHeight - playerSize.y;
-            isJumping = false; // Reset jumping state when player hits the ground
-            playerVelocityY = 0.0f;
-        }
-
-        // Define player rectangle
-        Rectangle playerRect = { playerPosition.x, playerPosition.y, playerSize.x, playerSize.y };
-
-        // Define obstacle rectangles
-        Rectangle obstacle1 = { 500, 350, 100, 50 };
-        Rectangle obstacle2 = { 300, 350, 150, 50 };
-        Rectangle obstacle3 = { 100, 300, 100, 50 };
-
-        // Check for collisions with obstacles
-        CollisionDirection collision = NONE; 
-        if(CheckCollisionRecsDirection(playerRect, obstacle1) != NONE)
-        {
-            collision = CheckCollisionRecsDirection(playerRect, obstacle1);
-            if (collision == 1)
-            {
-                playerPosition.y = obstacle1.y - playerSize.y;
-                isJumping = false;
-                playerVelocityY = 0.0f;
-                cout << "Collision detected on Bottom" << " RECT 1" << endl;
-            }else if (collision == 2)
-            {
-                cout << "Collision detected on Top" << " RECT 1" << endl;
-                isJumping = false;
-                playerVelocityY = 0.0f;
-                topCollision = true;
-            }else if (collision == 3){
-                playerPosition.x = obstacle1.x - playerSize.x;
-                cout << "Collision detected on right" << " RECT 1" << endl;
-            }else if (collision == 4)
-            {
-                playerPosition.x = obstacle1.x + obstacle1.width;
-                cout << "Collision detected on left" << " RECT 1" << endl;      
-            }
-            // cout << "Collision detected!" << "RECT 1" << CheckCollisionRecsDirection(playerRect, obstacle1) << endl;
-        }
-        else if(CheckCollisionRecsDirection(playerRect, obstacle2) != NONE)
-        {
-            collision = CheckCollisionRecsDirection(playerRect, obstacle2);
-            if (collision == 1)
-            {
-                playerPosition.y = obstacle2.y - playerSize.y;
-                isJumping = false;
-                playerVelocityY = 0.0f;
-                cout << "Collision detected on Bottom" << " RECT 1" << endl;
-            }else if (collision == 2)
-            {
-                cout << "Collision detected on Top" << " RECT 1" << endl;
-                isJumping = false;
-                playerVelocityY = 0.0f;
-                topCollision = true;
-            }else if (collision == 3){
-                playerPosition.x = obstacle2.x - playerSize.x;
-                cout << "Collision detected on right" << " RECT 1" << endl;
-            }else if (collision == 4)
-            {
-                playerPosition.x = obstacle2.x + obstacle2.width;
-                cout << "Collision detected on left" << " RECT 1" << endl;      
-            }
-        // cout << "Collision detected!" << "RECT 2" << CheckCollisionRecsDirection(playerRect, obstacle1) << endl;
-        }
-        else if(CheckCollisionRecsDirection(playerRect, obstacle3) != NONE)
-        {
-            collision = CheckCollisionRecsDirection(playerRect, obstacle3);
-            if (collision == 1)
-            {
-                playerPosition.y = obstacle3.y - playerSize.y;
-                isJumping = false;
-                playerVelocityY = 0.0f;
-                cout << "Collision detected on Bottom" << " RECT 1" << endl;
-            }else if (collision == 2)
-            {
-                cout << "Collision detected on Top" << " RECT 1" << endl;
-                isJumping = false;
-                playerVelocityY = 0.0f;
-                topCollision = true;
-            }else if (collision == 3){
-                playerPosition.x = obstacle3.x - playerSize.x;
-                cout << "Collision detected on right" << " RECT 1" << endl;
-            }else if (collision == 4)
-            {
-                playerPosition.x = obstacle3.x + obstacle3.width;
-                cout << "Collision detected on left" << " RECT 1" << endl;      
-            }
-            // cout << "Collision detected!"<< "RECT 3" << CheckCollisionRecsDirection(playerRect, obstacle3) << endl;
-        }
-
-
-
-        // Jumping
-        if (IsKeyPressed(KEY_SPACE) && !isJumping)
-        {
-            isJumping = true;
-            playerVelocityY = jumpVelocity;
-        }
-
-        // Gravity
-
-        playerPosition.y += gravity;
-        playerVelocityY += gravity;
-        playerPosition.y += playerVelocityY;
-
-        
-        
-        
-
-        topCollision = false;
-
-        // cout << "Player Position: " << playerPosition.x << ", " << playerPosition.y + playerSize.y << endl;
+        player1.Update();
+        CheckForCollisions(player1, obsticles, obstacleCount);
 
         //----------------------------------------------------------------------------------
 
@@ -214,9 +117,8 @@ int main(void)
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
-            DrawRectangle(playerPosition.x, playerPosition.y, 80, 80, MAROON);
-            DrawText("Hello world!!", 0, 0, 20, LIGHTGRAY);
-            DrawBackground();
+            player1.Draw();
+            DrawBackground(obsticles, obstacleCount);
         EndDrawing();
         //----------------------------------------------------------------------------------
     }

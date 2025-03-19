@@ -1,16 +1,31 @@
 #include "player.h"
 
 Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity)
-    : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f) {}
+     : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), direction(1) {}
 
 void Player::Update() {
-    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) position.x += speed;
-    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) position.x -= speed;
+    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
+    {
+        position.x += speed;
+        direction = 1;
+    }
+    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) 
+    {
+        position.x -= speed; 
+        direction = -1;
+    }
 
     // Jumping
     if (IsKeyPressed(KEY_SPACE) && !isJumping) {
         isJumping = true;
         playerVelocityY = jumpVelocity;
+    }
+
+    // Shooting
+    if (IsKeyPressed(KEY_E))
+    {
+        // Shoot
+        
     }
 
     // Apply gravity
@@ -25,12 +40,15 @@ void Player::Update() {
         isJumping = false; // Reset jumping state when player hits the ground
         playerVelocityY = 0.0f;
     }
+    
+    // cout << "Player Position: " << playerPosition.x << ", " << playerPosition.y + playerSize.y << endl;
+
 }
 
 void Player::Draw() {
     DrawRectangle(position.x, position.y, size.x, size.y, MAROON);
 }
 
-Rectangle Player::GetRectangle() const {
+Rectangle Player::GetRectangle(){
     return { position.x, position.y, size.x, size.y };
 }

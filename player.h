@@ -9,14 +9,15 @@ public:
 
     void Update();
     void Draw();
-    Rectangle GetRectangle() const;
+    Rectangle GetRectangle();
 
     bool isJumping;
     float playerVelocityY;
-
-private:
+    int direction;
     Vector2 position;
     Vector2 size;
+
+private:
     float speed;
     float gravity;
     float jumpVelocity;
