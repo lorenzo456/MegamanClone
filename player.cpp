@@ -1,7 +1,8 @@
 #include "player.h"
 
+
 Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity)
-     : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), direction(1) {}
+         : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), direction(1){}
 
 void Player::Update() {
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
@@ -19,13 +20,6 @@ void Player::Update() {
     if (IsKeyPressed(KEY_SPACE) && !isJumping) {
         isJumping = true;
         playerVelocityY = jumpVelocity;
-    }
-
-    // Shooting
-    if (IsKeyPressed(KEY_E))
-    {
-        // Shoot
-        
     }
 
     // Apply gravity

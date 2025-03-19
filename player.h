@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "raylib.h"
+#include "vector"
 
 class Player {
 public:
@@ -10,7 +11,7 @@ public:
     void Update();
     void Draw();
     Rectangle GetRectangle();
-
+    
     bool isJumping;
     float playerVelocityY;
     int direction;
