@@ -1,7 +1,11 @@
 #include "enemy.h"
+#include "bullet.h"
+#include <algorithm>
+#include <iostream>
+#include <ostream>
 
-Enemy::Enemy(Vector2 position, Vector2 size, float speed)
-    : position(position), size(size), speed(speed), direction(1), health(5), isActive(true) {}
+Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType)
+    : position(position), size(size), speed(speed), direction(1), health(5), isActive(true), enemyType(0){}
 
 void Enemy::Update() {
     if (isHit) {
@@ -12,6 +16,34 @@ void Enemy::Update() {
     if (health <= 0) {
         isActive = false;
     }
+
+    if (position.x < 0) position.x = 0;
+    // if (jumpVelocity > 0) {
+    //     CurrentVelocityY += gravity;
+    //     position.y += CurrentVelocityY;
+    // }
+    
+    for (Bullet* bullet : bullets)
+    {
+        if(bullet->isActive == false){
+            bullets.erase(std::remove(bullets.begin(), bullets.end(), bullet), bullets.end());
+        }
+    }
+
+    //raylib shoot every 5 seconds
+    static float shootTimer = 0.0f;
+    shootTimer += GetFrameTime();
+    if (shootTimer >= 5.0f) {
+        Shoot();
+        shootTimer = 0.0f;
+    }
+
+    for (Bullet* bullet : bullets)
+    {
+        bullet->update();
+        bullet->draw();
+    }
+
 }
 
 void Enemy::Draw() {
@@ -22,4 +54,11 @@ void Enemy::Draw() {
 
 Rectangle Enemy::GetRectangle() {
     return { position.x, position.y, size.x, size.y };
+}
+
+void Enemy::Shoot(){
+    Vector2 spawnPoint = {position.x - 1, position.y + size.y / 2};
+    Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, -1, 2.0f);
+    tempBullet->isActive = true;
+    bullets.push_back(tempBullet);
 }

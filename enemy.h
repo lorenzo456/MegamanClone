@@ -3,10 +3,11 @@
 
 #include "raylib.h"
 #include "vector"
+#include "bullet.h"
 
 class Enemy {
 public:
-    Enemy(Vector2 position, Vector2 size, float speed);
+    Enemy(Vector2 position, Vector2 size, float speed, int enemyType);
 
     void Update();
     void Draw();
@@ -21,6 +22,13 @@ public:
 
 private:
     float speed;
+    float gravity = 2.0f;
+    float CurrentVelocityY = 0.0f;
+    float jumpVelocity = -30.0f;
+    int enemyType = 0;
+    std::vector<Bullet*> bullets;
+    void Shoot();
+
 };
 
 #endif 

@@ -136,7 +136,7 @@ int main(void)
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
 
-    Enemy enemy1({(float)screenWidth - 80, screenHeight - 80}, {80, 80}, 5.0f);
+    Enemy enemy1({(float)screenWidth - 80, screenHeight - 80}, {80, 80}, 5.0f, 0);
     enemies.push_back(&enemy1);
 
     InitWindow(screenWidth, screenHeight, "MegaMan Example");
