@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = $(shell pkg-config --cflags raylib)
 LDFLAGS = $(shell pkg-config --libs raylib)
-SRC = main.cpp player.cpp obstacle.cpp bullet.cpp
+SRC = main.cpp player.cpp obstacle.cpp bullet.cpp enemy.cpp
 OUT = game
 
 all:
