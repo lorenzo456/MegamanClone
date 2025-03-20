@@ -2,12 +2,12 @@
 #define ENEMY_H
 
 #include "raylib.h"
-#include "vector"
+#include <vector>  // Use <vector> instead of "vector"
 #include "bullet.h"
 
 class Enemy {
 public:
-    Enemy(Vector2 position, Vector2 size, float speed, int enemyType);
+    Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::vector<Bullet*>&bullets);
 
     void Update();
     void Draw();
@@ -26,9 +26,8 @@ private:
     float CurrentVelocityY = 0.0f;
     float jumpVelocity = -30.0f;
     int enemyType = 0;
-    std::vector<Bullet*> bullets;
+    std::vector<Bullet*>& bullets; 
     void Shoot();
-
 };
 
-#endif 
+#endif

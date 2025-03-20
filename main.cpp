@@ -136,7 +136,7 @@ int main(void)
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
 
-    Enemy enemy1({(float)screenWidth - 80, screenHeight - 80}, {80, 80}, 5.0f, 0);
+    Enemy enemy1({(float)screenWidth - 80, screenHeight - 80}, {80, 80}, 5.0f, 0, bullets);
     enemies.push_back(&enemy1);
 
     InitWindow(screenWidth, screenHeight, "MegaMan Example");
@@ -159,7 +159,7 @@ int main(void)
             } else {
                 spawnPoint = {player1.position.x - 1, player1.position.y + player1.size.y / 2};
             }
-                        Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, player1.direction, 10.0f);
+            Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, player1.direction, 10.0f);
             tempBullet->isActive = true;
             bullets.push_back(tempBullet);
         }
