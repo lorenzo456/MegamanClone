@@ -9,7 +9,6 @@ void Bullet::update()
 
     if (position.x > GetScreenWidth() || position.x < 0)
     {
-        //detroy object
         isActive = false;
     }
 }  
@@ -18,4 +17,8 @@ void Bullet::draw() {
     if(isActive){
         DrawRectangle(position.x, position.y, size.x, size.y, RED);
     }
+}
+
+Rectangle Bullet::GetRectangle() {
+    return { position.x, position.y, size.x, size.y };
 }

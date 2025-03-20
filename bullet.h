@@ -7,7 +7,7 @@ public:
     Bullet(Vector2 position, Vector2 size, int direction, float speed);
     void update();
     void draw();
-    
+    Rectangle GetRectangle();
     int direction;
     Vector2 position;
     Vector2 size;

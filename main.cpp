@@ -96,6 +96,25 @@ void CheckForCollisions(Player& player, Obstacle obstacles[], int size)
     }
 }
 
+void CheckBulletCollision(std::vector<Bullet*>& bullets, std::vector<Enemy*>& enemies)
+{
+    for (Bullet* bullet : bullets)
+    {
+        for (Enemy* enemy : enemies)
+        {
+            if (CheckCollisionRecsDirection(bullet->GetRectangle(), enemy->GetRectangle()) != NONE)
+            {
+                CollisionDirection collision = CheckCollisionRecsDirection(bullet->GetRectangle(), enemy->GetRectangle());
+                if (collision != NONE)
+                {
+                    bullet->isActive = false;
+                    enemy->isHit = true;
+                }
+            }
+        }
+    }
+}
+
 
 int main(void)
 {
@@ -146,6 +165,7 @@ int main(void)
         }
 
         CheckForCollisions(player1, obsticles, obstacleCount);
+        CheckBulletCollision(bullets, enemies);
         for (Bullet* bullet : bullets)
         {
             bullet->update();
@@ -178,6 +198,9 @@ int main(void)
         bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Bullet* b) {
             return !b->isActive;
         }), bullets.end());
+        enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* e) {
+            return !e->isActive;
+        }), enemies.end());
     }
 
     // De-Initialization
