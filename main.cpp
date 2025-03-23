@@ -9,11 +9,11 @@ using namespace std;
 //------------------------------------------------------------------------------------
 // Program main entry point
 //------------------------------------------------------------------------------------
-void DrawBackground(Obstacle obstacles[], int size)
+void DrawBackground(std::vector<Obstacle*> &obstacles)
 {
-    for (int i = 0; i < size; i++)
+    for (Obstacle* obstacle : obstacles)
     {
-        obstacles[i].Draw();
+        obstacle->Draw();
     }
 }
 
@@ -72,32 +72,32 @@ CollisionDirection CheckCollisionRecsDirection(Rectangle rec1, Rectangle rec2)
     return NONE;
 }
 
-void CheckForCollisions(Player& player, Obstacle obstacles[], int size)
+void CheckForCollisions(Player& player, std::vector<Obstacle*> &obstacles)
 {
-    for (int i = 0; i < size; i++)
+    for (Obstacle* obstacle : obstacles)
     {
-        if (CheckCollisionRecsDirection(player.GetRectangle(), obstacles[i].GetRectangle()) != NONE)
+        if (CheckCollisionRecsDirection(player.GetRectangle(), obstacle->GetRectangle()) != NONE)
         {
-            CollisionDirection collision = CheckCollisionRecsDirection(player.GetRectangle(), obstacles[i].GetRectangle());
+            CollisionDirection collision = CheckCollisionRecsDirection(player.GetRectangle(), obstacle->GetRectangle());
             if (collision == 1)
             {
-                player.position.y = obstacles[i].position.y - player.size.y;
+                player.position.y = obstacle->position.y - player.size.y;
                 player.isJumping = false;
                 player.playerVelocityY = 0.0f;
             }
             else if (collision == 2)
             {
-                player.position.y = obstacles[i].position.y + obstacles[i].size.y;
+                player.position.y = obstacle->position.y + obstacle->size.y;
                 player.isJumping = false;
                 player.playerVelocityY = 0.0f;
             }
             else if (collision == 3)
             {
-                player.position.x = obstacles[i].position.x - player.size.x;
+                player.position.x = obstacle->position.x - player.size.x;
             }
             else if (collision == 4)
             {
-                player.position.x = obstacles[i].position.x + obstacles[i].size.x;
+                player.position.x = obstacle->position.x + obstacle->size.x;
             }
         }
     }
@@ -158,7 +158,10 @@ void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
 }
 
 
+void init_level_1()
+{
 
+}
 
 
 int main(void)
@@ -168,48 +171,34 @@ int main(void)
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-
-    Obstacle obstacles[7] = {
-        Obstacle({0, 420},   {800, 30}),  // Floor (Y = 420)
-        Obstacle({0, 300},   {200, 30}),  // Left lower platform (Y = 330)
-        Obstacle({80, 180}, {200, 30}),  // Mid-left platform (Y = 210)
-        Obstacle({300, 90}, {200, 30}),  // High-up left platform (Y = 110)
-
-        Obstacle({345, 250}, {100, 30}),  // High-up left platform (Y = 110)
-
-        // Right side platforms, adjusted to match the left side platforms' Y-values
-        Obstacle({800 - 190, 330}, {200, 30}),  // Mirrored right lower platform (Y = 330)
-        Obstacle({800 - 90 - 200, 210}, {200, 30}),  // Mirrored mid-right platform (Y = 210)
-    };
-    
-    
-    
-    
-    
-    int obstacleCount = sizeof(obstacles) / sizeof(obstacles[0]);
-    
-    // Player player1({0, (float)screenHeight}, {80, 80}, 5.0f, 2.0f, -30.0f);
     Player player1({50, screenHeight}, {40, 50}, 5.0f, 1.5f, -20.0f); // Adjusted size
+
+
+    std::vector<Obstacle*> obstacles;
+    Obstacle obstacle1({0, 420},   {800, 30});  // Floor (Y = 420)
+    Obstacle obstacle2({0, 300},   {200, 30});  // Left lower platform (Y = 330)
+    Obstacle obstacle3({80, 180}, {200, 30}); // Mid-left platform (Y = 210)
+    Obstacle obstacle4({300, 90}, {200, 30});  // High-up left platform (Y = 110)
+    Obstacle obstacle5({345, 250}, {100, 30});  // High-up left platform (Y = 110)
+    Obstacle obstacle6({800 - 190, 330}, {200, 30});  // Mirrored right lower platform (Y = 330)
+    Obstacle obstacle7({800 - 90 - 200, 210}, {200, 30});  // Mirrored mid-right platform (Y = 210)
+    obstacles.push_back(&obstacle1);
+    obstacles.push_back(&obstacle2);
+    obstacles.push_back(&obstacle3);
+    obstacles.push_back(&obstacle4);
+    obstacles.push_back(&obstacle5);
+    obstacles.push_back(&obstacle6);
+    obstacles.push_back(&obstacle7);
+    
 
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
 
-    // Enemy enemy1({(float)screenWidth - 80, screenHeight - 80}, {80, 80}, 5.0f, 0, bullets);
-    // enemies.push_back(&enemy1);
-
-    // Left side (original)
     Enemy enemy1({100, 300 - 50}, {50, 50}, 5.0f, 0, bullets, 2.0f);  // On left lower platform
     Enemy enemy4({700, 330 - 50}, {50, 50}, 0, 0,   bullets, 2.0f);  // On mirrored right lower platform
-
     Enemy enemy5({200, 180 - 50}, {50, 50}, 3.5f, 1, bullets, 2.0f);  // On mirrored mid-right platform
     Enemy enemy2({550, 210 - 50}, {50, 50}, 4.0f, 0, bullets, 2.0f);  // On mid-left platform
-
     Enemy enemy3({400, 90 - 50}, {50, 50}, 3.0f, 0, bullets, 1.0f);  // On high-up left platform
-
-
-
-
-    // Add enemies to the vector
     enemies.push_back(&enemy1);
     enemies.push_back(&enemy2);
     enemies.push_back(&enemy3);
@@ -228,6 +217,9 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
+
+
+        //PlayerController
         player1.Update();
         if (IsKeyPressed(KEY_E))
         {
@@ -246,7 +238,7 @@ int main(void)
         CheckPlayerEnemyProximity(player1, enemies);
 
         //Check colissions
-        CheckForCollisions(player1, obstacles, obstacleCount);
+        CheckForCollisions(player1, obstacles);
         CheckBulletCollision(bullets, enemies);
         CheckBulletPlayerCollision(bullets, &player1);
 
@@ -269,7 +261,7 @@ int main(void)
 
             ClearBackground(RAYWHITE);
             player1.Draw();
-            DrawBackground(obstacles, obstacleCount);
+            DrawBackground(obstacles);
             DrawEnemies(enemies);
             DrawBullets(bullets);
         EndDrawing();
