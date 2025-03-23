@@ -26,6 +26,7 @@ private:
     float CurrentVelocityY = 0.0f;
     float jumpVelocity = -30.0f;
     int enemyType = 0;
+    float shootTimer = 0.0f;
     std::vector<Bullet*>& bullets; 
     void Shoot();
 };

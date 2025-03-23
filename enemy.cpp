@@ -20,12 +20,11 @@ void Enemy::Update() {
     if (position.x < 0) position.x = 0;
 
     // Raylib shoot every 5 seconds
-    static float shootTimer = 0.0f;
     shootTimer += GetFrameTime();
     if (shootTimer >= 5.0f) {
         Shoot();
         shootTimer = 0.0f;
-        std::cout << "Enemy Shoot" << std::endl;
+        // std::cout << "Enemy Shoot" << std::endl;
     }
 
 
@@ -43,8 +42,8 @@ Rectangle Enemy::GetRectangle() {
 
 void Enemy::Shoot() {
     // Vector2 spawnPoint = { position.x - size.x, position.y + size.y / 2 };
-    Vector2 spawnPoint = {position.x - size.x, position.y + size.y / 2};
-    Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, -1, 10.0f);
+    Vector2 spawnPoint = {position.x - size.x + 10, position.y + size.y / 2};
+    Bullet* tempBullet = new Bullet({position.x - size.x + 10, position.y + size.y / 2}, {10, 5}, -1, 10.0f);
     tempBullet->isActive = true;
     bullets.push_back(tempBullet);
 }

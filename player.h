@@ -10,15 +10,19 @@ public:
 
     void Update();
     void Draw();
+    void OnHit(int damage);
+    void OnDeath();
     Rectangle GetRectangle();
     
     bool isJumping;
+    bool isHit;
     float playerVelocityY;
     int direction;
     Vector2 position;
     Vector2 size;
 
 private:
+    int health;
     float speed;
     float gravity;
     float jumpVelocity;
