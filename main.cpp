@@ -32,6 +32,22 @@ void DrawEnemies(std::vector<Enemy*>& enemies)
     }
 }
 
+void UpdateEnemies(std::vector<Enemy*>& enemies)
+{
+    for (Enemy* enemy : enemies)
+    {
+        enemy->Update();
+    }
+}
+
+void UpdateBullets(std::vector<Bullet*>& bullets)
+{
+    for (Bullet* bullet : bullets)
+    {
+        bullet->update();
+    }
+}
+
 enum CollisionDirection {
     NONE,
     TOP,
@@ -176,6 +192,64 @@ void init_level_1(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies
 }
 
 
+void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth)
+{
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        gameState = GAME;
+    }
+
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    DrawText(titleText, (screenWidth / 2) - (titleWidth / 2), screenHeight / 2 - 20, 20, LIGHTGRAY);
+    DrawText(startText, (screenWidth / 2) - (startWidth / 2), screenHeight / 2 + 10, 20, LIGHTGRAY);
+    EndDrawing();
+}
+
+void CheckPlayerControllers(Player player, std::vector<Bullet*> &bullets)
+{
+    //PlayerController
+    if (IsKeyPressed(KEY_E))
+    {
+        Vector2 spawnPoint;
+        if (player.direction == 1) {
+            spawnPoint = {player.position.x + player.size.x, player.position.y + player.size.y / 2};
+        } else {
+            spawnPoint = {player.position.x - 10, player.position.y + player.size.y / 2};
+        }
+        Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, player.direction, 10.0f);
+        tempBullet->isActive = true;
+        bullets.push_back(tempBullet);
+    }
+}
+
+void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*> &enemies, std::vector<Bullet*> &bullets)
+{
+        // Draw
+        //----------------------------------------------------------------------------------
+        BeginDrawing();
+            ClearBackground(RAYWHITE);
+            player1.Draw();
+            DrawBackground(obstacles);
+            DrawEnemies(enemies);
+            DrawBullets(bullets);
+        EndDrawing();
+        //----------------------------------------------------------------------------------
+}
+
+void GarbageCollection(std::vector<Enemy*> &enemies,std::vector<Bullet*> &bullets, bool cleanAll = false)
+{
+        //Garbage Collection
+        //----------------------------------------------------------------------------------
+        bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Bullet* b) {
+            return !b->isActive;
+        }), bullets.end());
+        enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* e) {
+            return !e->isActive;
+        }), enemies.end());
+
+}
+
 int main(void)
 {
     // Initialization
@@ -183,14 +257,24 @@ int main(void)
     const int screenWidth = 800;
     const int screenHeight = 450;
 
+
     InitWindow(screenWidth, screenHeight, "MegaMan Example");
+
+    const char* titleText = "Welcome to MegaMan!";
+    const char* startText = "Press ENTER to Start";
+
+    int titleWidth = MeasureText(titleText, 20);
+    int startWidth = MeasureText(startText, 20);
 
     std::vector<Obstacle*> obstacles;
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
     Player player1({50, screenHeight}, {40, 50}, 5.0f, 1.5f, -20.0f); // Adjusted size
-    init_level_1(obstacles, enemies, bullets);
+    
+    bool has_init_level1 = false;
 
+    GameState gameState = START;
+    int currentLevel = 1;
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -203,64 +287,39 @@ int main(void)
         //----------------------------------------------------------------------------------
 
 
-        //PlayerController
-        player1.Update();
-        if (IsKeyPressed(KEY_E))
+        if(gameState == GAME)
         {
-            Vector2 spawnPoint;
-            if (player1.direction == 1) {
-                spawnPoint = {player1.position.x + player1.size.x, player1.position.y + player1.size.y / 2};
-            } else {
-                spawnPoint = {player1.position.x - 10, player1.position.y + player1.size.y / 2};
+            if(!has_init_level1 && currentLevel == 1)
+            {
+                init_level_1(obstacles, enemies, bullets);
+                has_init_level1 = true;
             }
-            Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, player1.direction, 10.0f);
-            tempBullet->isActive = true;
-            bullets.push_back(tempBullet);
-        }
+                CheckPlayerControllers(player1, bullets);
+                //Check directions
+                CheckPlayerEnemyProximity(player1, enemies);
 
-        //Check directions
-        CheckPlayerEnemyProximity(player1, enemies);
+                //Check colissions
+                CheckForCollisions(player1, obstacles);
+                CheckBulletCollision(bullets, enemies);
+                CheckBulletPlayerCollision(bullets, &player1);
 
-        //Check colissions
-        CheckForCollisions(player1, obstacles);
-        CheckBulletCollision(bullets, enemies);
-        CheckBulletPlayerCollision(bullets, &player1);
 
-        for (Bullet* bullet : bullets)
+                //Update functions
+                player1.Update();
+                UpdateBullets(bullets);
+                UpdateEnemies(enemies);
+
+                Draw(player1, obstacles, enemies, bullets);
+                GarbageCollection(enemies, bullets);
+
+        }else if (gameState == START)
         {
-            bullet->update();
-        }
-        for(Enemy* enemy : enemies)
-        {
-            enemy->Update();
+            UpdateHomeScreen(gameState, titleText, startText, screenWidth, screenHeight, titleWidth, startWidth);
         }
 
-
-    
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
-
-            ClearBackground(RAYWHITE);
-            player1.Draw();
-            DrawBackground(obstacles);
-            DrawEnemies(enemies);
-            DrawBullets(bullets);
-        EndDrawing();
-        //----------------------------------------------------------------------------------
-
-
-        //Garbage Collection
-        //----------------------------------------------------------------------------------
-        bullets.erase(std::remove_if(bullets.begin(), bullets.end(), [](Bullet* b) {
-            return !b->isActive;
-        }), bullets.end());
-        enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [](Enemy* e) {
-            return !e->isActive;
-        }), enemies.end());
     }
+
+
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
