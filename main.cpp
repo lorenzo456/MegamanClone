@@ -40,6 +40,13 @@ enum CollisionDirection {
     RIGHT
 };
 
+enum GameState {
+    START,
+    GAME,
+    GAMEOVER,
+    END,
+};
+
 CollisionDirection CheckCollisionRecsDirection(Rectangle rec1, Rectangle rec2)
 {
     if (rec1.x < rec2.x + rec2.width &&
@@ -130,6 +137,30 @@ void CheckBulletPlayerCollision(std::vector<Bullet*>& bullets, Player* player)
     }
 }
 
+bool IsPlayerToRightOfObstacle(Player& player, Enemy& enemy)
+{
+    return player.position.x > enemy.position.x + enemy.size.x;
+}
+
+void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
+{
+    for (Enemy* enemy : enemies)
+    {
+        if (IsPlayerToRightOfObstacle(player, *enemy))
+        {
+            enemy->direction = 1; // Change direction to right
+        }
+        else
+        {
+            enemy->direction = -1; // Change direction to left
+        }
+    }
+}
+
+
+
+
+
 int main(void)
 {
     // Initialization
@@ -138,12 +169,14 @@ int main(void)
     const int screenHeight = 450;
 
 
-    Obstacle obstacles[6] = {
+    Obstacle obstacles[7] = {
         Obstacle({0, 420},   {800, 30}),  // Floor (Y = 420)
-        Obstacle({0, 330},   {200, 30}),  // Left lower platform (Y = 330)
-        Obstacle({100, 210}, {200, 30}),  // Mid-left platform (Y = 210)
-        Obstacle({300, 110}, {200, 30}),  // High-up left platform (Y = 110)
-        
+        Obstacle({0, 300},   {200, 30}),  // Left lower platform (Y = 330)
+        Obstacle({80, 180}, {200, 30}),  // Mid-left platform (Y = 210)
+        Obstacle({300, 90}, {200, 30}),  // High-up left platform (Y = 110)
+
+        Obstacle({345, 250}, {100, 30}),  // High-up left platform (Y = 110)
+
         // Right side platforms, adjusted to match the left side platforms' Y-values
         Obstacle({800 - 190, 330}, {200, 30}),  // Mirrored right lower platform (Y = 330)
         Obstacle({800 - 90 - 200, 210}, {200, 30}),  // Mirrored mid-right platform (Y = 210)
@@ -165,13 +198,13 @@ int main(void)
     // enemies.push_back(&enemy1);
 
     // Left side (original)
-    Enemy enemy1({100, 330 - 50}, {50, 50}, 5.0f, 0, bullets, 2.0f);  // On left lower platform
+    Enemy enemy1({100, 300 - 50}, {50, 50}, 5.0f, 0, bullets, 2.0f);  // On left lower platform
     Enemy enemy4({700, 330 - 50}, {50, 50}, 0, 0,   bullets, 2.0f);  // On mirrored right lower platform
 
-    Enemy enemy5({200, 210 - 50}, {50, 50}, 3.5f, 1, bullets, 2.0f);  // On mirrored mid-right platform
+    Enemy enemy5({200, 180 - 50}, {50, 50}, 3.5f, 1, bullets, 2.0f);  // On mirrored mid-right platform
     Enemy enemy2({550, 210 - 50}, {50, 50}, 4.0f, 0, bullets, 2.0f);  // On mid-left platform
 
-    Enemy enemy3({400, 110 - 50}, {50, 50}, 3.0f, 0, bullets, 1.0f);  // On high-up left platform
+    Enemy enemy3({400, 90 - 50}, {50, 50}, 3.0f, 0, bullets, 1.0f);  // On high-up left platform
 
 
 
@@ -209,6 +242,10 @@ int main(void)
             bullets.push_back(tempBullet);
         }
 
+        //Check directions
+        CheckPlayerEnemyProximity(player1, enemies);
+
+        //Check colissions
         CheckForCollisions(player1, obstacles, obstacleCount);
         CheckBulletCollision(bullets, enemies);
         CheckBulletPlayerCollision(bullets, &player1);

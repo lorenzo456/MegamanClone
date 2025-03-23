@@ -28,7 +28,8 @@ private:
     int enemyType = 0;
     float shootTimer = 0.0f;
     float shootDelay;
-    float initShootDelay;    
+    float initShootDelay;
+    Vector2 bulletSpawnpoint;    
     std::vector<Bullet*>& bullets; 
     void Shoot();
 };

@@ -47,8 +47,12 @@ Rectangle Enemy::GetRectangle() {
 
 void Enemy::Shoot() {
     // Vector2 spawnPoint = { position.x - size.x, position.y + size.y / 2 };
-    Vector2 spawnPoint = {position.x - size.x + 10, position.y + size.y / 2};
-    Bullet* tempBullet = new Bullet({position.x - size.x + 10, position.y + size.y / 2}, {10, 5}, -1, 10.0f);
+    if (direction == 1){
+        bulletSpawnpoint = {position.x + size.x + 10, position.y + size.y / 2};
+    }else{
+        bulletSpawnpoint = {position.x - size.x + 10, position.y + size.y / 2};
+    }
+    Bullet* tempBullet = new Bullet(bulletSpawnpoint, {10, 5}, direction, 10.0f);
     tempBullet->isActive = true;
     bullets.push_back(tempBullet);
 }
