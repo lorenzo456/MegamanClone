@@ -4,8 +4,12 @@
 #include <iostream>
 #include <ostream>
 
-Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::vector<Bullet*>& bullets)
-    : position(position), size(size), speed(speed), direction(1), health(5), isActive(true), enemyType(enemyType), bullets(bullets) {}
+Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::vector<Bullet*>& bullets, float shootDelay)
+    : position(position), size(size), speed(speed), direction(1), health(5), isActive(true), enemyType(enemyType), bullets(bullets), shootDelay(shootDelay) 
+    {
+        initShootDelay = static_cast<float>(GetRandomValue(0, 10)) / 10.0f;
+
+    }
 
 void Enemy::Update() {
     if (isHit) {
@@ -21,9 +25,10 @@ void Enemy::Update() {
 
     // Raylib shoot every 5 seconds
     shootTimer += GetFrameTime();
-    if (shootTimer >= 5.0f) {
+    if (shootTimer >= shootDelay + initShootDelay) {
         Shoot();
         shootTimer = 0.0f;
+        initShootDelay = 0;
         // std::cout << "Enemy Shoot" << std::endl;
     }
 

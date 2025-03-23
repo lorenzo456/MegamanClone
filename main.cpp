@@ -165,13 +165,13 @@ int main(void)
     // enemies.push_back(&enemy1);
 
     // Left side (original)
-    Enemy enemy1({100, 330 - 50}, {50, 50}, 5.0f, 0, bullets);  // On left lower platform
-    Enemy enemy4({700, 330 - 50}, {50, 50}, 0, 0, bullets);  // On mirrored right lower platform
+    Enemy enemy1({100, 330 - 50}, {50, 50}, 5.0f, 0, bullets, 2.0f);  // On left lower platform
+    Enemy enemy4({700, 330 - 50}, {50, 50}, 0, 0,   bullets, 2.0f);  // On mirrored right lower platform
 
-    Enemy enemy5({200, 210 - 50}, {50, 50}, 3.5f, 1, bullets);  // On mirrored mid-right platform
-    Enemy enemy2({550, 210 - 50}, {50, 50}, 4.0f, 0, bullets);  // On mid-left platform
+    Enemy enemy5({200, 210 - 50}, {50, 50}, 3.5f, 1, bullets, 2.0f);  // On mirrored mid-right platform
+    Enemy enemy2({550, 210 - 50}, {50, 50}, 4.0f, 0, bullets, 2.0f);  // On mid-left platform
 
-    Enemy enemy3({400, 110 - 50}, {50, 50}, 3.0f, 0, bullets);  // On high-up left platform
+    Enemy enemy3({400, 110 - 50}, {50, 50}, 3.0f, 0, bullets, 1.0f);  // On high-up left platform
 
 
 

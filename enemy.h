@@ -7,7 +7,7 @@
 
 class Enemy {
 public:
-    Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::vector<Bullet*>&bullets);
+    Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::vector<Bullet*>&bullets, float shootDelay);
 
     void Update();
     void Draw();
@@ -27,6 +27,8 @@ private:
     float jumpVelocity = -30.0f;
     int enemyType = 0;
     float shootTimer = 0.0f;
+    float shootDelay;
+    float initShootDelay;    
     std::vector<Bullet*>& bullets; 
     void Shoot();
 };
