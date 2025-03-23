@@ -4,11 +4,11 @@
 #include <iostream>
 #include <ostream>
 
-Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::vector<Bullet*>& bullets, float shootDelay)
-    : position(position), size(size), speed(speed), direction(1), health(5), isActive(true), enemyType(enemyType), bullets(bullets), shootDelay(shootDelay) 
+Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::vector<Bullet*>& bullets, float shootDelay, std::vector<Enemy*>&enemies)
+    : position(position), size(size), speed(speed), direction(1), health(5), isActive(true), enemyType(enemyType), bullets(bullets), shootDelay(shootDelay), enemies(enemies) 
     {
         initShootDelay = static_cast<float>(GetRandomValue(0, 10)) / 10.0f;
-
+        enemies.push_back(this);
     }
 
 void Enemy::Update() {

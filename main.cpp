@@ -158,9 +158,21 @@ void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
 }
 
 
-void init_level_1()
+void init_level_1(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies, std::vector<Bullet*>&bullets)
 {
+    new Obstacle({0, 420},   {800, 30}, obstacles);  // Floor (Y = 420)
+    new Obstacle({0, 300},   {200, 30}, obstacles);  // Left lower platform (Y = 330)
+    new Obstacle({80, 180}, {200, 30}, obstacles); // Mid-left platform (Y = 210)
+    new Obstacle({300, 90}, {200, 30}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({345, 250}, {100, 30}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({800 - 190, 330}, {200, 30}, obstacles);  // Mirrored right lower platform (Y = 330)
+    new Obstacle({800 - 90 - 200, 210}, {200, 30}, obstacles);  // Mirrored mid-right platform (Y = 210)
 
+    new Enemy({100, 300 - 50}, {50, 50}, 5.0f, 0, bullets, 2.0f, enemies);  // On left lower platform
+    new Enemy({700, 330 - 50}, {50, 50}, 0, 0,   bullets, 2.0f, enemies);  // On mirrored right lower platform
+    new Enemy({200, 180 - 50}, {50, 50}, 3.5f, 1, bullets, 2.0f, enemies);  // On mirrored mid-right platform
+    new Enemy({550, 210 - 50}, {50, 50}, 4.0f, 0, bullets, 2.0f, enemies);  // On mid-left platform
+    new Enemy({400, 90 - 50}, {50, 50}, 3.0f, 0, bullets, 1.0f, enemies);  // On high-up left platform
 }
 
 
@@ -171,42 +183,14 @@ int main(void)
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-    Player player1({50, screenHeight}, {40, 50}, 5.0f, 1.5f, -20.0f); // Adjusted size
-
+    InitWindow(screenWidth, screenHeight, "MegaMan Example");
 
     std::vector<Obstacle*> obstacles;
-    Obstacle obstacle1({0, 420},   {800, 30});  // Floor (Y = 420)
-    Obstacle obstacle2({0, 300},   {200, 30});  // Left lower platform (Y = 330)
-    Obstacle obstacle3({80, 180}, {200, 30}); // Mid-left platform (Y = 210)
-    Obstacle obstacle4({300, 90}, {200, 30});  // High-up left platform (Y = 110)
-    Obstacle obstacle5({345, 250}, {100, 30});  // High-up left platform (Y = 110)
-    Obstacle obstacle6({800 - 190, 330}, {200, 30});  // Mirrored right lower platform (Y = 330)
-    Obstacle obstacle7({800 - 90 - 200, 210}, {200, 30});  // Mirrored mid-right platform (Y = 210)
-    obstacles.push_back(&obstacle1);
-    obstacles.push_back(&obstacle2);
-    obstacles.push_back(&obstacle3);
-    obstacles.push_back(&obstacle4);
-    obstacles.push_back(&obstacle5);
-    obstacles.push_back(&obstacle6);
-    obstacles.push_back(&obstacle7);
-    
-
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
+    Player player1({50, screenHeight}, {40, 50}, 5.0f, 1.5f, -20.0f); // Adjusted size
+    init_level_1(obstacles, enemies, bullets);
 
-    Enemy enemy1({100, 300 - 50}, {50, 50}, 5.0f, 0, bullets, 2.0f);  // On left lower platform
-    Enemy enemy4({700, 330 - 50}, {50, 50}, 0, 0,   bullets, 2.0f);  // On mirrored right lower platform
-    Enemy enemy5({200, 180 - 50}, {50, 50}, 3.5f, 1, bullets, 2.0f);  // On mirrored mid-right platform
-    Enemy enemy2({550, 210 - 50}, {50, 50}, 4.0f, 0, bullets, 2.0f);  // On mid-left platform
-    Enemy enemy3({400, 90 - 50}, {50, 50}, 3.0f, 0, bullets, 1.0f);  // On high-up left platform
-    enemies.push_back(&enemy1);
-    enemies.push_back(&enemy2);
-    enemies.push_back(&enemy3);
-    enemies.push_back(&enemy4);
-    enemies.push_back(&enemy5);
-
-
-    InitWindow(screenWidth, screenHeight, "MegaMan Example");
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
