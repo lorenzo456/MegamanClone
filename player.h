@@ -3,10 +3,11 @@
 
 #include "raylib.h"
 #include "vector"
+#include "bullet.h"
 
 class Player {
 public:
-    Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity);
+    Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity, std::vector<Bullet*> &bullets);
 
     void Update();
     void Draw();
@@ -26,13 +27,18 @@ private:
     float speed;
     float gravity;
     float jumpVelocity;
-    Texture2D character;
+    Texture2D characterIdle;
+    Texture2D characterWalk;
     Rectangle frameRec;
+
+    Sound laser;
     float frameWidth;   // Sprite one frame rectangle width
     float frameHeight;           // Sprite one frame rectangle height
+    float currentSpeed;
     int currentFrame;
     int currentLine;
     int frameCounter;
+    std::vector<Bullet*> &bullets;
 };
 
 #endif // PLAYER_H

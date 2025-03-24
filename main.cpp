@@ -206,22 +206,6 @@ void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* s
     EndDrawing();
 }
 
-void CheckPlayerControllers(Player player, std::vector<Bullet*> &bullets)
-{
-    //PlayerController
-    if (IsKeyPressed(KEY_E))
-    {
-        Vector2 spawnPoint;
-        if (player.direction == 1) {
-            spawnPoint = {player.position.x + player.size.x, player.position.y + player.size.y / 2};
-        } else {
-            spawnPoint = {player.position.x - 10, player.position.y + player.size.y / 2};
-        }
-        Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, player.direction, 10.0f);
-        tempBullet->isActive = true;
-        bullets.push_back(tempBullet);
-    }
-}
 
 void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*> &enemies, std::vector<Bullet*> &bullets)
 {
@@ -259,7 +243,7 @@ int main(void)
 
 
     InitWindow(screenWidth, screenHeight, "MegaMan Example");
-
+    InitAudioDevice();
     const char* titleText = "Welcome to MegaMan!";
     const char* startText = "Press ENTER to Start";
 
@@ -269,7 +253,7 @@ int main(void)
     std::vector<Obstacle*> obstacles;
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
-    Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f); // Adjusted size
+    Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
     
     bool has_init_level1 = false;
 
@@ -294,7 +278,6 @@ int main(void)
                 init_level_1(obstacles, enemies, bullets);
                 has_init_level1 = true;
             }
-                CheckPlayerControllers(player1, bullets);
                 //Check directions
                 CheckPlayerEnemyProximity(player1, enemies);
 

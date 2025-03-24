@@ -1,19 +1,21 @@
 #include "player.h"
 #include <ostream>
 #include <iostream>
+#include "bullet.h"
 
 
-Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity)
-         : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), health(3), direction(1)
+Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity, std::vector<Bullet*> &bullets)
+         : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), health(3), direction(1), bullets(bullets)
          {
 
-            character = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
-            frameWidth = (float)(character.width/11);   // Sprite one frame rectangle width
-            frameHeight = (float)(character.height/1);           // Sprite one frame rectangle height
+            characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
+            characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
+            laser = LoadSound("Sounds/Laser/laser1.wav");
+            frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
+            frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
             currentFrame = 0;
             currentLine = 0;
             frameCounter = 0;
-            
             frameRec = { 0, 0, frameWidth, frameHeight };
 
          }
@@ -23,15 +25,17 @@ void Player::Update() {
 
     if(health < 0)
         return;
-
+    currentSpeed = 0;
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
     {
         position.x += speed;
+        currentSpeed = speed;
         direction = 1;
     }
     if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) 
     {
         position.x -= speed; 
+        currentSpeed = speed;
         direction = -1;
     }
 
@@ -55,6 +59,21 @@ void Player::Update() {
     }
     
     // cout << "Player Position: " << playerPosition.x << ", " << playerPosition.y + playerSize.y << endl;
+
+
+    if (IsKeyPressed(KEY_E))
+    {
+        Vector2 spawnPoint;
+        if (direction == 1) {
+            spawnPoint = {position.x + size.x, position.y + size.y / 2};
+        } else {
+            spawnPoint = {position.x - 10, position.y + size.y / 2};
+        }
+        Bullet* tempBullet = new Bullet(spawnPoint, {10, 5}, direction, 10.0f);
+        tempBullet->isActive = true;
+        bullets.push_back(tempBullet);
+        PlaySound(laser);
+    }
 
 
     frameCounter++;
@@ -99,8 +118,13 @@ void Player::OnDeath(){
 void Player::Draw() {
     if(health >= 0)
     {
-        // DrawRectangle(position.x, position.y, size.x, size.y, MAROON);
-        DrawTextureRec(character, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+        if(currentSpeed > 0){
+            DrawTextureRec(characterWalk, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+
+        }else{
+            DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+
+        }
     }
 }
 
