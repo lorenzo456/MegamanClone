@@ -29,11 +29,14 @@ private:
     float jumpVelocity;
     Texture2D characterIdle;
     Texture2D characterWalk;
+    Texture2D hearts;
     Rectangle frameRec;
 
     Sound laser;
     float frameWidth;   // Sprite one frame rectangle width
     float frameHeight;           // Sprite one frame rectangle height
+    float heartsFrameWidth;
+    float heartsFrameHeight;
     float currentSpeed;
     int currentFrame;
     int currentLine;

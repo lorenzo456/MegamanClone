@@ -7,6 +7,11 @@
 Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity, std::vector<Bullet*> &bullets)
          : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), health(3), direction(1), bullets(bullets)
          {
+            hearts = LoadTexture("Sprites/Hearts/HealthUI.png");
+            hearts.width *= 5;
+            hearts.height *= 5;
+            heartsFrameWidth = (float)(hearts.width/1);   // Sprite one frame rectangle width
+            heartsFrameHeight = (float)(hearts.height/7);           // Sprite one frame rectangle height
 
             characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
             characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
@@ -123,9 +128,24 @@ void Player::Draw() {
 
         }else{
             DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
-
         }
     }
+
+    if(health == 3)
+    {
+        DrawTextureRec(hearts, { heartsFrameWidth * 0, heartsFrameWidth * 0, heartsFrameWidth, heartsFrameHeight }, {0,0}, WHITE);
+    }else if (health == 2)
+    {
+        DrawTextureRec(hearts, { heartsFrameWidth * 0, heartsFrameWidth * 3, heartsFrameWidth, heartsFrameHeight }, {0,0}, WHITE);
+    }else if (health == 1)
+    {
+        DrawTextureRec(hearts, { heartsFrameWidth * 0, heartsFrameWidth * 6, heartsFrameWidth, heartsFrameHeight }, {0,0}, WHITE);
+    }else{
+        DrawTextureRec(hearts, { heartsFrameWidth * 0, heartsFrameWidth * 9, heartsFrameWidth, heartsFrameHeight }, {0,0}, WHITE);
+    }
+    
+    
+
 }
 
 Rectangle Player::GetRectangle(){
