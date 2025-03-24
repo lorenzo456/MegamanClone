@@ -176,19 +176,19 @@ void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
 
 void init_level_1(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies, std::vector<Bullet*>&bullets)
 {
-    new Obstacle({0, 420},   {800, 30}, obstacles);  // Floor (Y = 420)
-    new Obstacle({0, 300},   {200, 30}, obstacles);  // Left lower platform (Y = 330)
-    new Obstacle({80, 180}, {200, 30}, obstacles); // Mid-left platform (Y = 210)
-    new Obstacle({300, 90}, {200, 30}, obstacles);  // High-up left platform (Y = 110)
-    new Obstacle({345, 250}, {100, 30}, obstacles);  // High-up left platform (Y = 110)
-    new Obstacle({800 - 190, 330}, {200, 30}, obstacles);  // Mirrored right lower platform (Y = 330)
-    new Obstacle({800 - 90 - 200, 210}, {200, 30}, obstacles);  // Mirrored mid-right platform (Y = 210)
+    new Obstacle({0, 420},   {800,40}, obstacles);  // Floor (Y = 420)
+    new Obstacle({0, 300},   {200, 40}, obstacles);  // Left lower platform (Y = 330)
+    new Obstacle({80, 180}, {200, 40}, obstacles); // Mid-left platform (Y = 210)
+    new Obstacle({300, 90}, {200, 40}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({345, 250}, {100, 40}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({800 - 190, 330}, {200, 40}, obstacles);  // Mirrored right lower platform (Y = 330)
+    new Obstacle({800 - 90 - 200, 210}, {200, 40}, obstacles);  // Mirrored mid-right platform (Y = 210)
 
-    new Enemy({100, 300 - 50}, {50, 50}, 5.0f, 0, bullets, 2.0f, enemies);  // On left lower platform
-    new Enemy({700, 330 - 50}, {50, 50}, 0, 0,   bullets, 2.0f, enemies);  // On mirrored right lower platform
-    new Enemy({200, 180 - 50}, {50, 50}, 3.5f, 1, bullets, 2.0f, enemies);  // On mirrored mid-right platform
-    new Enemy({550, 210 - 50}, {50, 50}, 4.0f, 0, bullets, 2.0f, enemies);  // On mid-left platform
-    new Enemy({400, 90 - 50}, {50, 50}, 3.0f, 0, bullets, 1.0f, enemies);  // On high-up left platform
+    new Enemy({100, 300 - 32}, {32, 32}, 5.0f, 0, bullets, 2.0f, enemies);  // On left lower platform
+    new Enemy({700, 330 - 32}, {32, 32}, 0, 0,   bullets, 2.0f, enemies);  // On mirrored right lower platform
+    new Enemy({200, 180 - 32}, {32, 32}, 3.5f, 1, bullets, 2.0f, enemies);  // On mirrored mid-right platform
+    new Enemy({550, 210 - 32}, {32, 32}, 4.0f, 0, bullets, 2.0f, enemies);  // On mid-left platform
+    new Enemy({400, 90 -  32},  {32, 32}, 3.0f, 0, bullets, 1.0f, enemies);  // On high-up left platform
 }
 
 
@@ -269,7 +269,7 @@ int main(void)
     std::vector<Obstacle*> obstacles;
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
-    Player player1({50, screenHeight}, {40, 50}, 5.0f, 1.5f, -20.0f); // Adjusted size
+    Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f); // Adjusted size
     
     bool has_init_level1 = false;
 

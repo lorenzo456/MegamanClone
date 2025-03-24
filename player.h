@@ -26,6 +26,13 @@ private:
     float speed;
     float gravity;
     float jumpVelocity;
+    Texture2D character;
+    Rectangle frameRec;
+    float frameWidth;   // Sprite one frame rectangle width
+    float frameHeight;           // Sprite one frame rectangle height
+    int currentFrame;
+    int currentLine;
+    int frameCounter;
 };
 
 #endif // PLAYER_H
