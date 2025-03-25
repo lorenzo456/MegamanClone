@@ -153,6 +153,33 @@ void CheckBulletPlayerCollision(std::vector<Bullet*>& bullets, Player* player)
     }
 }
 
+void CheckObstacleEnemyCollision(std::vector<Obstacle*>& obstacles, std::vector<Enemy*>& enemies)
+{
+    for (Obstacle* obstacle : obstacles)
+    {
+        for (Enemy* enemy : enemies)
+        {
+            if (CheckCollisionRecsDirection(obstacle->GetRectangle(), enemy->GetRectangle()) != NONE)
+            {
+            CollisionDirection collision = CheckCollisionRecsDirection(obstacle->GetRectangle(), enemy->GetRectangle());
+            if (collision == BOTTOM)
+            {
+                enemy->position.y = obstacle->position.y - enemy->size.y;
+                enemy->velocityY = 0.0f;
+            }
+            else if (collision == LEFT)
+            {
+                enemy->position.x = obstacle->position.x - enemy->size.x;
+            }
+            else if (collision == RIGHT)
+            {
+                enemy->position.x = obstacle->position.x + obstacle->size.x;
+            }
+            }
+        }
+    }
+}
+
 bool IsPlayerToRightOfObstacle(Player& player, Enemy& enemy)
 {
     return player.position.x > enemy.position.x + enemy.size.x;
@@ -347,6 +374,7 @@ int main(void)
                 CheckForCollisions(player1, obstacles);
                 CheckBulletCollision(bullets, enemies);
                 CheckBulletPlayerCollision(bullets, &player1);
+                CheckObstacleEnemyCollision(obstacles, enemies);
 
 
                 //Update functions

@@ -165,7 +165,7 @@ void Player::OnDeath(){
 
 void Player::Draw() {
     if (health >= 0) {
-        if (!invinsible || ((currentInvinsibleFrame / 5) % 2 == 0)) { 
+        if (!invinsible || (currentInvinsibleFrame / 5) % 2 == 0) { 
             if (currentSpeed > 0) {
                 DrawTextureRec(characterWalk, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
             } else {

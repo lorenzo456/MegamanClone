@@ -12,7 +12,7 @@ Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::ve
         laser2 = LoadSound("Sounds/Laser/laser2.wav");
         hitSound = LoadSound("Sounds/Hit/hit.wav");
         isHit = false;
-
+        velocityY = 0;
     }
 
 void Enemy::Update() {
@@ -27,6 +27,19 @@ void Enemy::Update() {
     }
 
     if (position.x < 0) position.x = 0;
+
+
+
+    velocityY += gravity;
+    position.y += velocityY;
+
+    // Collision detection with screen edges
+    if (position.x < 0) position.x = 0;
+    if (position.x > GetScreenWidth() - size.x) position.x = GetScreenWidth() - size.x;
+    if (position.y > GetScreenHeight() - size.y) {
+        position.y = GetScreenHeight() - size.y;
+        velocityY = 0.0f;
+    }
 
     // Raylib shoot every 5 seconds
     shootTimer += GetFrameTime();

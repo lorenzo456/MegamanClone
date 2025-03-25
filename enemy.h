@@ -17,6 +17,7 @@ public:
     int health = 5;
     bool isActive;
     bool isHit;
+    float velocityY;
     Vector2 position;
     Vector2 size;
 
