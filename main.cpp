@@ -206,9 +206,22 @@ void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* s
     EndDrawing();
 }
 
+void UpdateGameOverScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth)
+{
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        gameState = START;        
+    }
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    DrawText(titleText, (screenWidth / 2) - (titleWidth / 2), screenHeight / 2 - 20, 20, LIGHTGRAY);
+    DrawText(startText, (screenWidth / 2) - (startWidth / 2), screenHeight / 2 + 10, 20, LIGHTGRAY);
+    EndDrawing();
+}
 
 void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*> &enemies, std::vector<Bullet*> &bullets)
 {
+    
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
@@ -221,7 +234,7 @@ void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*>
         //----------------------------------------------------------------------------------
 }
 
-void GarbageCollection(std::vector<Enemy*> &enemies,std::vector<Bullet*> &bullets, bool cleanAll = false)
+void GarbageCollection(std::vector<Enemy*> &enemies,std::vector<Bullet*> &bullets, Player &player,bool cleanAll = false)
 {
         //Garbage Collection
         //----------------------------------------------------------------------------------
@@ -232,7 +245,21 @@ void GarbageCollection(std::vector<Enemy*> &enemies,std::vector<Bullet*> &bullet
             return !e->isActive;
         }), enemies.end());
 
+
+        if (cleanAll) {
+            for (Bullet* bullet : bullets) {
+            delete bullet;
+            }
+            bullets.clear();
+
+            for (Enemy* enemy : enemies) {
+            delete enemy;
+            }
+            enemies.clear();
+        }
 }
+
+
 
 int main(void)
 {
@@ -246,17 +273,21 @@ int main(void)
     InitAudioDevice();
     const char* titleText = "Welcome to MegaMan!";
     const char* startText = "Press ENTER to Start";
+    const char* gameoverText = "Game Over";
+    const char* restartText = "Press ENTER to Restart";
 
     int titleWidth = MeasureText(titleText, 20);
     int startWidth = MeasureText(startText, 20);
 
+    int gameoverWidth = MeasureText(gameoverText, 9);
+    int restartWidth = MeasureText(restartText, 22);
+
     std::vector<Obstacle*> obstacles;
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
-    Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
-    
-    bool has_init_level1 = false;
 
+    Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
+    bool has_init_level1 = false;
     GameState gameState = START;
     int currentLevel = 1;
 
@@ -276,6 +307,7 @@ int main(void)
             if(!has_init_level1 && currentLevel == 1)
             {
                 init_level_1(obstacles, enemies, bullets);
+                player1.Init({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, 3, 1, bullets, true);
                 has_init_level1 = true;
             }
                 //Check directions
@@ -289,15 +321,26 @@ int main(void)
 
                 //Update functions
                 player1.Update();
+                if (!player1.isAlive)
+                {
+                    gameState = GAMEOVER;
+                }
+                
                 UpdateBullets(bullets);
                 UpdateEnemies(enemies);
 
                 Draw(player1, obstacles, enemies, bullets);
-                GarbageCollection(enemies, bullets);
+                GarbageCollection(enemies, bullets, player1);
 
         }else if (gameState == START)
         {
             UpdateHomeScreen(gameState, titleText, startText, screenWidth, screenHeight, titleWidth, startWidth);
+        }else if(gameState == GAMEOVER)
+        {
+            GarbageCollection(enemies, bullets, player1, true);
+            UpdateGameOverScreen(gameState, gameoverText, restartText, screenWidth, screenHeight, gameoverWidth, restartWidth);
+            has_init_level1 = false;
+            currentLevel = 1;
         }
 
     }

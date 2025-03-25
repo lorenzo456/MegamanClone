@@ -13,10 +13,12 @@ public:
     void Draw();
     void OnHit(int damage);
     void OnDeath();
+    void Init(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity, int health, int direction, std::vector<Bullet*> &bullets, bool isAlive);
     Rectangle GetRectangle();
     
     bool isJumping;
     bool isHit;
+    bool isAlive;
     float playerVelocityY;
     int direction;
     Vector2 position;
@@ -41,6 +43,8 @@ private:
     int currentFrame;
     int currentLine;
     int frameCounter;
+    int deathCount;
+    int currentDeathCount;
     std::vector<Bullet*> &bullets;
 };
 

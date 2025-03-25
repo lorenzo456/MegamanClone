@@ -5,7 +5,7 @@
 
 
 Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity, std::vector<Bullet*> &bullets)
-         : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), health(3), direction(1), bullets(bullets)
+         : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), health(3), direction(1), bullets(bullets), isAlive(true)
          {
             hearts = LoadTexture("Sprites/Hearts/HealthUI.png");
             hearts.width *= 5;
@@ -18,18 +18,44 @@ Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float
             laser = LoadSound("Sounds/Laser/laser1.wav");
             frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
             frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
-            currentFrame = 0;
-            currentLine = 0;
-            frameCounter = 0;
-            frameRec = { 0, 0, frameWidth, frameHeight };
-
+            // currentFrame = 0;
+            // currentLine = 0;
+            // frameCounter = 0;
+            // frameRec = { 0, 0, frameWidth, frameHeight };
+            // deathCount = 3;
+            Player::Init(position, size, speed, gravity, jumpVelocity, health, direction,  bullets, isAlive);
          }
          
 
-void Player::Update() {
+void Player::Init(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity, int health, int direction, std::vector<Bullet*> &bullets, bool isAlive)
+{
+    this->position = position;
+    this->size = size;
+    this->speed = speed;
+    this->gravity = gravity;
+    this->jumpVelocity = jumpVelocity;
+    this->bullets = bullets;
+    this->currentFrame = 0;
+    this->currentLine = 0;
+    this->frameCounter = 0;
+    this->frameRec = { 0, 0, frameWidth, frameHeight };
+    this->deathCount = 3;
+    this->isAlive = isAlive;
+    this->direction = direction;
+    this->health = health;
+}
 
-    if(health < 0)
+void Player::Update() {
+    
+    if(health < 0){
+        currentDeathCount++;
+        if(currentDeathCount > deathCount)
+        {
+            isAlive = false;
+        }
         return;
+    }
+
     currentSpeed = 0;
     if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D))
     {
