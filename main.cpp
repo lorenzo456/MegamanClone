@@ -191,6 +191,24 @@ void init_level_1(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies
     new Enemy({400, 90 -  32},  {32, 32}, 3.0f, 0, bullets, 1.0f, enemies);  // On high-up left platform
 }
 
+void init_level_2(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies, std::vector<Bullet*>&bullets)
+{
+    new Obstacle({0, 420},   {800,40}, obstacles);  // Floor (Y = 420)
+    new Obstacle({0, 300},   {200, 40}, obstacles);  // Left lower platform (Y = 330)
+    new Obstacle({80, 180}, {200, 40}, obstacles); // Mid-left platform (Y = 210)
+    new Obstacle({300, 90}, {200, 40}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({345, 250}, {100, 40}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({800 - 190, 330}, {200, 40}, obstacles);  // Mirrored right lower platform (Y = 330)
+    new Obstacle({800 - 90 - 200, 210}, {200, 40}, obstacles);  // Mirrored mid-right platform (Y = 210)
+
+    new Enemy({100, 300 - 52}, {32, 32}, 5.0f, 0, bullets, 2.0f, enemies);  // On left lower platform
+    new Enemy({700, 330 - 52}, {32, 32}, 0, 0,   bullets, 2.0f, enemies);  // On mirrored right lower platform
+    new Enemy({200, 180 - 52}, {32, 32}, 3.5f, 1, bullets, 2.0f, enemies);  // On mirrored mid-right platform
+    new Enemy({550, 210 - 52}, {32, 32}, 4.0f, 0, bullets, 2.0f, enemies);  // On mid-left platform
+    new Enemy({400, 90 -  52},  {32, 32}, 3.0f, 0, bullets, 1.0f, enemies);  // On high-up left platform
+}
+
+
 
 void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth)
 {
@@ -234,7 +252,7 @@ void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*>
         //----------------------------------------------------------------------------------
 }
 
-void GarbageCollection(std::vector<Enemy*> &enemies,std::vector<Bullet*> &bullets, Player &player,bool cleanAll = false)
+void GarbageCollection(std::vector<Enemy*> &enemies,std::vector<Bullet*> &bullets,bool cleanAll = false)
 {
         //Garbage Collection
         //----------------------------------------------------------------------------------
@@ -288,6 +306,8 @@ int main(void)
 
     Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
     bool has_init_level1 = false;
+    bool has_init_level2 = false;
+
     GameState gameState = START;
     int currentLevel = 1;
 
@@ -309,6 +329,11 @@ int main(void)
                 init_level_1(obstacles, enemies, bullets);
                 player1.Init({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, 3, 1, bullets, true);
                 has_init_level1 = true;
+            }else if(!has_init_level2 && currentLevel == 2)
+            {
+                GarbageCollection(enemies, bullets, true);
+                init_level_2(obstacles, enemies, bullets);
+                has_init_level2 = true;
             }
                 //Check directions
                 CheckPlayerEnemyProximity(player1, enemies);
@@ -329,15 +354,21 @@ int main(void)
                 UpdateBullets(bullets);
                 UpdateEnemies(enemies);
 
+                if (enemies.empty() || std::all_of(enemies.begin(), enemies.end(), [](Enemy* e) { return !e->isActive; }))
+                {
+                    currentLevel++;
+                }                
+                
+
                 Draw(player1, obstacles, enemies, bullets);
-                GarbageCollection(enemies, bullets, player1);
+                GarbageCollection(enemies, bullets);
 
         }else if (gameState == START)
         {
             UpdateHomeScreen(gameState, titleText, startText, screenWidth, screenHeight, titleWidth, startWidth);
         }else if(gameState == GAMEOVER)
         {
-            GarbageCollection(enemies, bullets, player1, true);
+            GarbageCollection(enemies, bullets, true);
             UpdateGameOverScreen(gameState, gameoverText, restartText, screenWidth, screenHeight, gameoverWidth, restartWidth);
             has_init_level1 = false;
             currentLevel = 1;

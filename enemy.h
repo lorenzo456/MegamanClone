@@ -29,6 +29,8 @@ private:
     float shootTimer = 0.0f;
     float shootDelay;
     float initShootDelay;
+    Sound laser2;
+    Sound hitSound;
     Vector2 bulletSpawnpoint;    
     std::vector<Bullet*>&bullets; 
     std::vector<Enemy*>&enemies;

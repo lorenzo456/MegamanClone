@@ -16,6 +16,8 @@ Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float
             characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
             characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
             laser = LoadSound("Sounds/Laser/laser1.wav");
+            jumpSound = LoadSound("Sounds/Jump/jump.wav");
+            hitSound = LoadSound("Sounds/Hit/hit.wav");
             frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
             frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
             // currentFrame = 0;
@@ -74,6 +76,7 @@ void Player::Update() {
     if (IsKeyPressed(KEY_SPACE) && !isJumping) {
         isJumping = true;
         playerVelocityY = jumpVelocity;
+        PlaySound(jumpSound);
     }
 
     // Apply gravity
@@ -134,6 +137,7 @@ void Player::OnHit(int damage){
     if(!isHit){
         isHit = true;
         health -= damage;
+        PlaySound(hitSound);
         if(health < 0){
             OnDeath();
         }

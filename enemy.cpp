@@ -9,11 +9,16 @@ Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::ve
     {
         initShootDelay = static_cast<float>(GetRandomValue(0, 10)) / 10.0f;
         enemies.push_back(this);
+        laser2 = LoadSound("Sounds/Laser/laser2.wav");
+        hitSound = LoadSound("Sounds/Hit/hit.wav");
+        isHit = false;
+
     }
 
 void Enemy::Update() {
     if (isHit) {
         health--;
+        PlaySound(hitSound);
         isHit = false;
     }
 
@@ -55,4 +60,5 @@ void Enemy::Shoot() {
     Bullet* tempBullet = new Bullet(bulletSpawnpoint, {10, 5}, direction, 10.0f);
     tempBullet->isActive = true;
     bullets.push_back(tempBullet);
+    PlaySound(laser2);
 }

@@ -35,6 +35,9 @@ private:
     Rectangle frameRec;
 
     Sound laser;
+    Sound jumpSound;
+    Sound hitSound;
+
     float frameWidth;   // Sprite one frame rectangle width
     float frameHeight;           // Sprite one frame rectangle height
     float heartsFrameWidth;
