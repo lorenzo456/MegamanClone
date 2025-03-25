@@ -62,6 +62,31 @@ enum GameState {
     GAMEOVER,
     END,
 };
+void SwitchMusic(Music &currentSong, string name)
+{
+
+    if (name == "menu"){
+        Music musicMenu = LoadMusicStream("Music/Menu.mp3");
+        StopMusicStream(currentSong);
+        UnloadMusicStream(currentSong);
+        currentSong = musicMenu;
+        PlayMusicStream(musicMenu);
+    }else if (name == "main"){
+        Music musicMain = LoadMusicStream("Music/Main.mp3");
+        StopMusicStream(currentSong);
+        UnloadMusicStream(currentSong);
+        currentSong = musicMain;
+        PlayMusicStream(musicMain);
+    }else if (name == "gameOver"){
+        Music musicGameOver = LoadMusicStream("Music/GameOver.mp3");
+        StopMusicStream(currentSong);
+        UnloadMusicStream(currentSong);
+        currentSong = musicGameOver;
+        PlayMusicStream(musicGameOver);
+    }
+
+
+}
 
 CollisionDirection CheckCollisionRecsDirection(Rectangle rec1, Rectangle rec2)
 {
@@ -243,8 +268,16 @@ void init_level_2(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies
 
 
 
-void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth)
+void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth, Music &currentMusic, Music &musicHomeScreen,bool &firstFrameHomeScreen)
 {
+
+    if(!firstFrameHomeScreen)
+    {
+        SwitchMusic(currentMusic, "menu");
+        firstFrameHomeScreen = true;
+        std::cout << "LOAD MUSIC HOME" <<endl;
+    }
+
     if (IsKeyPressed(KEY_ENTER))
     {
         gameState = GAME;
@@ -257,8 +290,15 @@ void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* s
     EndDrawing();
 }
 
-void UpdateGameOverScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth)
+void UpdateGameOverScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth, Music &currentMusic, Music &musicGameOver,bool &firstGameOverFrame)
 {
+    if(!firstGameOverFrame)
+    {
+        SwitchMusic(currentMusic, "gameOver");
+        firstGameOverFrame = true;
+        std::cout << "LOAD MUSIC OVER" <<endl;
+    }
+
     if (IsKeyPressed(KEY_ENTER))
     {
         gameState = START;        
@@ -311,7 +351,6 @@ void GarbageCollection(std::vector<Enemy*> &enemies,std::vector<Bullet*> &bullet
 }
 
 
-
 int main(void)
 {
     // Initialization
@@ -322,6 +361,13 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "MegaMan Example");
     InitAudioDevice();
+
+    Music musicMain = LoadMusicStream("Music/Main.mp3");
+    Music musicMenu = LoadMusicStream("Music/Menu.mp3");
+    Music musicGameOver = LoadMusicStream("Music/GameOver.mp3");
+    Music currentMusic = { 0 };
+    float timeMusicPlayed = 0.0f;        // Time played normalized [0.0f..1.0f]
+
     const char* titleText = "Welcome to MegaMan!";
     const char* startText = "Press ENTER to Start";
     const char* gameoverText = "Game Over";
@@ -341,6 +387,9 @@ int main(void)
     bool has_init_level1 = false;
     bool has_init_level2 = false;
 
+    bool firstGameOverFrame = false;
+    bool firstFrameHomeScreen = false;
+
     GameState gameState = START;
     int currentLevel = 1;
 
@@ -353,16 +402,23 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
+        UpdateMusicStream(currentMusic);
 
 
         if(gameState == GAME)
         {
+
             if(!has_init_level1 && currentLevel == 1)
             {
+                firstGameOverFrame = false;
+                firstFrameHomeScreen = false;
+                SwitchMusic(currentMusic, "main");
+                std::cout << "LOAD MUSIC LEVEL1" <<endl;
                 init_level_1(obstacles, enemies, bullets);
                 player1.Init({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, 3, 1, bullets, true);
                 has_init_level1 = true;
-            }else if(!has_init_level2 && currentLevel == 2)
+            }           
+            else if(!has_init_level2 && currentLevel == 2)
             {
                 GarbageCollection(enemies, bullets, true);
                 init_level_2(obstacles, enemies, bullets);
@@ -399,11 +455,11 @@ int main(void)
 
         }else if (gameState == START)
         {
-            UpdateHomeScreen(gameState, titleText, startText, screenWidth, screenHeight, titleWidth, startWidth);
+            UpdateHomeScreen(gameState, titleText, startText, screenWidth, screenHeight, titleWidth, startWidth, currentMusic, musicMenu, firstFrameHomeScreen);
         }else if(gameState == GAMEOVER)
         {
             GarbageCollection(enemies, bullets, true);
-            UpdateGameOverScreen(gameState, gameoverText, restartText, screenWidth, screenHeight, gameoverWidth, restartWidth);
+            UpdateGameOverScreen(gameState, gameoverText, restartText, screenWidth, screenHeight, gameoverWidth, restartWidth, currentMusic, musicGameOver, firstGameOverFrame);
             has_init_level1 = false;
             currentLevel = 1;
         }
