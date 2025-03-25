@@ -170,6 +170,11 @@ void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
         {
             enemy->direction = -1; // Change direction to left
         }
+
+        if (CheckCollisionRecsDirection(player.GetRectangle(), enemy->GetRectangle()))
+        {
+            // player.OnHit(1);
+        }
     }
 }
 

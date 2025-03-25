@@ -26,6 +26,9 @@ public:
 
 private:
     int health;
+    bool invinsible;
+    int invinsibleFrames;
+    int currentInvinsibleFrame;
     float speed;
     float gravity;
     float jumpVelocity;

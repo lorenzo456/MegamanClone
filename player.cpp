@@ -45,6 +45,9 @@ void Player::Init(Vector2 position, Vector2 size, float speed, float gravity, fl
     this->isAlive = isAlive;
     this->direction = direction;
     this->health = health;
+    invinsibleFrames = 60;
+    currentInvinsibleFrame = 0;
+    invinsible = false;
 }
 
 void Player::Update() {
@@ -109,6 +112,15 @@ void Player::Update() {
         PlaySound(laser);
     }
 
+    if (invinsible){
+        currentInvinsibleFrame++;
+        if(currentInvinsibleFrame > invinsibleFrames)
+        {
+            invinsible = false;
+            currentInvinsibleFrame = 0;
+        }
+    }
+
 
     frameCounter++;
     if (frameCounter > 2)
@@ -134,9 +146,10 @@ void Player::Update() {
 }
 
 void Player::OnHit(int damage){
-    if(!isHit){
+    if(!isHit && !invinsible){
         isHit = true;
         health -= damage;
+        invinsible = true;
         PlaySound(hitSound);
         if(health < 0){
             OnDeath();
@@ -151,16 +164,16 @@ void Player::OnDeath(){
 }
 
 void Player::Draw() {
-    if(health >= 0)
-    {
-        if(currentSpeed > 0){
-            DrawTextureRec(characterWalk, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
-
-        }else{
-            DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+    if (health >= 0) {
+        if (!invinsible || ((currentInvinsibleFrame / 5) % 2 == 0)) { 
+            if (currentSpeed > 0) {
+                DrawTextureRec(characterWalk, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+            } else {
+                DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+            }
         }
     }
-
+    
     if(health == 3)
     {
         DrawTextureRec(hearts, { heartsFrameWidth * 0, heartsFrameWidth * 0, heartsFrameWidth, heartsFrameHeight }, {0,0}, WHITE);
