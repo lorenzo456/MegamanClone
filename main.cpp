@@ -200,7 +200,8 @@ void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
 
         if (CheckCollisionRecsDirection(player.GetRectangle(), enemy->GetRectangle()))
         {
-            // player.OnHit(1);
+            player.OnHit(1);
+            player.position.x += player.size.x * player.direction * -1;
         }
     }
 }
