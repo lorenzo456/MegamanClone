@@ -5,6 +5,7 @@
 #include "obstacle.h"
 #include "bullet.h"
 #include "enemy.h"
+#include <cmath>
 using namespace std;
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -192,14 +193,14 @@ void CheckObstacleEnemyCollision(std::vector<Obstacle*>& obstacles, std::vector<
                 enemy->position.y = obstacle->position.y - enemy->size.y;
                 enemy->velocityY = 0.0f;
             }
-            else if (collision == LEFT)
-            {
-                enemy->position.x = obstacle->position.x - enemy->size.x;
-            }
-            else if (collision == RIGHT)
-            {
-                enemy->position.x = obstacle->position.x + obstacle->size.x;
-            }
+            // else if (collision == LEFT)
+            // {
+            //     enemy->position.x = obstacle->position.x - enemy->size.x;
+            // }
+            // else if (collision == RIGHT)
+            // {
+            //     enemy->position.x = obstacle->position.x + obstacle->size.x;
+            // }
             }
         }
     }
@@ -223,7 +224,7 @@ void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
             enemy->direction = -1; // Change direction to left
         }
 
-        if (CheckCollisionRecsDirection(player.GetRectangle(), enemy->GetRectangle()))
+        if (CheckCollisionRecsDirection(player.GetRectangle(), enemy->GetRectangle()) && !player.invinsible)
         {
             player.OnHit(1);
             player.position.x += player.size.x * player.direction * -1;
@@ -244,12 +245,12 @@ void init_level_1(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies
 
     new Enemy({100, 300 - 32}, {32, 32}, 5.0f, 0, bullets, 2.0f, enemies);  // On left lower platform
     new Enemy({700, 330 - 32}, {32, 32}, 0, 0,   bullets, 2.0f, enemies);  // On mirrored right lower platform
-    new Enemy({200, 180 - 32}, {32, 32}, 3.5f, 1, bullets, 2.0f, enemies);  // On mirrored mid-right platform
+    new Enemy({200, 180 - 32}, {32, 32}, 3.5f, 0, bullets, 2.0f, enemies);  // On mirrored mid-right platform
     new Enemy({550, 210 - 32}, {32, 32}, 4.0f, 0, bullets, 2.0f, enemies);  // On mid-left platform
     new Enemy({400, 90 -  32},  {32, 32}, 3.0f, 0, bullets, 1.0f, enemies);  // On high-up left platform
 }
 
-void init_level_2(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies, std::vector<Bullet*>&bullets)
+void init_level_2(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies, std::vector<Bullet*>&bullets, Player &player)
 {
     new Obstacle({0, 420},   {800,40}, obstacles);  // Floor (Y = 420)
     new Obstacle({0, 300},   {200, 40}, obstacles);  // Left lower platform (Y = 330)
@@ -259,11 +260,37 @@ void init_level_2(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies
     new Obstacle({800 - 190, 330}, {200, 40}, obstacles);  // Mirrored right lower platform (Y = 330)
     new Obstacle({800 - 90 - 200, 210}, {200, 40}, obstacles);  // Mirrored mid-right platform (Y = 210)
 
-    new Enemy({100, 300 - 52}, {32, 32}, 5.0f, 0, bullets, 2.0f, enemies);  // On left lower platform
-    new Enemy({700, 330 - 52}, {32, 32}, 0, 0,   bullets, 2.0f, enemies);  // On mirrored right lower platform
-    new Enemy({200, 180 - 52}, {32, 32}, 3.5f, 1, bullets, 2.0f, enemies);  // On mirrored mid-right platform
-    new Enemy({550, 210 - 52}, {32, 32}, 4.0f, 0, bullets, 2.0f, enemies);  // On mid-left platform
-    new Enemy({400, 90 -  52},  {32, 32}, 3.0f, 0, bullets, 1.0f, enemies);  // On high-up left platform
+    new Enemy({800, 450}, {32, 32}, 180.0f, 1, bullets, 2.0f, enemies);  
+    new Enemy({0, 450}, {32, 32}, 180.0f, 1, bullets, 2.0f, enemies);  
+
+    new Enemy({700, 180}, {32, 32}, 180.0f, 1, bullets, 2.0f, enemies);  
+    new Enemy({100, 180}, {32, 32}, 180.0f, 1, bullets, 2.0f, enemies);  
+    new Enemy({400, 90 -  32},  {32, 32}, 3.0f, 1, bullets, 1.0f, enemies);  // On high-up left platform
+
+}
+
+float Distance(const Vector2& a, const Vector2& b) {
+    return std::sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y));
+}
+
+void MoveEnemiesToPlayerIfClose(Player& player, std::vector<Enemy*>& enemies, float distanceThreshold)
+{
+        if(!player.invinsible){
+            for (Enemy* enemy : enemies)
+            {
+                if (enemy->enemyType == 1) // Check if the enemy is of type 1
+                {
+                    // float distance = sqrt(pow(player.position.x - enemy->position.x, 2) + pow(player.position.y - enemy->position.y, 2));
+                    float distancexy = Distance(player.position, enemy->position);
+                    float distancex = std::abs(player.position.x - enemy->position.x);
+                    if (distancexy < distanceThreshold && distancex > 2)
+                    {
+                        enemy->FollowPlayer(player.position);
+                    }
+                }
+            }
+        }
+
 }
 
 
@@ -421,7 +448,7 @@ int main(void)
             else if(!has_init_level2 && currentLevel == 2)
             {
                 GarbageCollection(enemies, bullets, true);
-                init_level_2(obstacles, enemies, bullets);
+                init_level_2(obstacles, enemies, bullets, player1);
                 has_init_level2 = true;
             }
                 //Check directions
@@ -443,6 +470,7 @@ int main(void)
                 
                 UpdateBullets(bullets);
                 UpdateEnemies(enemies);
+                MoveEnemiesToPlayerIfClose(player1, enemies, 200);
 
                 if (enemies.empty() || std::all_of(enemies.begin(), enemies.end(), [](Enemy* e) { return !e->isActive; }))
                 {

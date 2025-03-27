@@ -12,11 +12,14 @@ public:
     void Update();
     void Draw();
     Rectangle GetRectangle();
+    void FollowPlayer(Vector2 playerDirection);
     
     int direction;
     int health = 5;
+    int enemyType = 0;
     bool isActive;
     bool isHit;
+    bool follow;
     float velocityY;
     Vector2 position;
     Vector2 size;
@@ -26,7 +29,6 @@ private:
     float gravity = 2.0f;
     float CurrentVelocityY = 0.0f;
     float jumpVelocity = -30.0f;
-    int enemyType = 0;
     float shootTimer = 0.0f;
     float shootDelay;
     float initShootDelay;

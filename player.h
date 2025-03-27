@@ -19,6 +19,7 @@ public:
     bool isJumping;
     bool isHit;
     bool isAlive;
+    bool invinsible;
     float playerVelocityY;
     int direction;
     Vector2 position;
@@ -26,7 +27,6 @@ public:
 
 private:
     int health;
-    bool invinsible;
     int invinsibleFrames;
     int currentInvinsibleFrame;
     float speed;

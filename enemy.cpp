@@ -41,16 +41,32 @@ void Enemy::Update() {
         velocityY = 0.0f;
     }
 
-    // Raylib shoot every 5 seconds
-    shootTimer += GetFrameTime();
-    if (shootTimer >= shootDelay + initShootDelay) {
-        Shoot();
-        shootTimer = 0.0f;
-        initShootDelay = 0;
-        // std::cout << "Enemy Shoot" << std::endl;
+
+    if (enemyType == 0)
+    {
+        shootTimer += GetFrameTime();
+        if (shootTimer >= shootDelay + initShootDelay) {
+            Shoot();
+            shootTimer = 0.0f;
+            initShootDelay = 0;
+            // std::cout << "Enemy Shoot" << std::endl;
+        }
+    }else if (enemyType == 1)
+    {
+
     }
 
+}
 
+void Enemy::FollowPlayer(Vector2 playerDirection)
+{
+    if (playerDirection.x > position.x) {
+        position.x += speed * GetFrameTime();
+        direction = 1;
+    } else if (playerDirection.x < position.x) {    
+        position.x -= speed * GetFrameTime();
+        direction = -1;
+    }
 }
 
 void Enemy::Draw() {
