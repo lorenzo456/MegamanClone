@@ -418,7 +418,7 @@ int main(void)
     bool firstFrameHomeScreen = false;
 
     GameState gameState = START;
-    int currentLevel = 2;
+    int currentLevel = 1;
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------

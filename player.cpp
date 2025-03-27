@@ -27,6 +27,7 @@ Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float
             frameRec = { 0, 0, frameWidth, frameHeight };
             deathCount = 3;
             shootingTimer = 0;
+            currentDeathCount =0;
             Player::Init(position, size, speed, gravity, jumpVelocity, health, direction,  bullets, isAlive);
          }
          
@@ -51,6 +52,7 @@ void Player::Init(Vector2 position, Vector2 size, float speed, float gravity, fl
     invinsibleFrames = 60;
     currentInvinsibleFrame = 0;
     invinsible = false;
+    currentDeathCount = 0;
 }
 
 void Player::Update() {
