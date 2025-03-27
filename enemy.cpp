@@ -13,14 +13,18 @@ Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::ve
         hitSound = LoadSound("Sounds/Hit/hit.wav");
         characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
         characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
+        characterShoot = LoadTexture("Sprites/VirtualGuy/Shoot(32x32).png");
         frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
         frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
         currentFrame = 0;
         currentLine = 0;
         frameCounter = 0;
         frameRec = { 0, 0, frameWidth, frameHeight };
+        isShooting = false;
+        shootingTimer = 0;
         isHit = false;
         velocityY = 0;
+        currentSpeed = 0;
     }
 
 void Enemy::Update() {
@@ -80,22 +84,42 @@ void Enemy::Update() {
     }
     frameRec.x = frameWidth*currentFrame;
     frameRec.y = frameHeight*currentLine;
+
+
+    if (isShooting) {
+        shootingTimer += GetFrameTime();
+        if (shootingTimer >= 0.1f) {
+            isShooting = false;
+            shootingTimer = 0;
+        }
+    }
+    currentSpeed = 0;
 }
 
 void Enemy::FollowPlayer(Vector2 playerDirection)
 {
     if (playerDirection.x > position.x) {
-        position.x += speed * GetFrameTime();
+        currentSpeed += speed * GetFrameTime();
         direction = 1;
+        position.x += currentSpeed * direction;
     } else if (playerDirection.x < position.x) {    
-        position.x -= speed * GetFrameTime();
+        currentSpeed += speed * GetFrameTime();
         direction = -1;
+        position.x += currentSpeed * direction;
     }
 }
 
 void Enemy::Draw() {
-    DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+    if(isShooting){
+        DrawTextureRec(characterShoot, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+    }else{
+    if (currentSpeed > 0) {
+        DrawTextureRec(characterWalk, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+    } else {
 
+            DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+        }
+    }
 }
 
 Rectangle Enemy::GetRectangle() {

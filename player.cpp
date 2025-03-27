@@ -15,16 +15,18 @@ Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float
 
             characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
             characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
+            characterShoot = LoadTexture("Sprites/VirtualGuy/Shoot(32x32).png");
             laser = LoadSound("Sounds/Laser/laser1.wav");
             jumpSound = LoadSound("Sounds/Jump/jump.wav");
             hitSound = LoadSound("Sounds/Hit/hit.wav");
             frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
             frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
-            // currentFrame = 0;
-            // currentLine = 0;
-            // frameCounter = 0;
-            // frameRec = { 0, 0, frameWidth, frameHeight };
-            // deathCount = 3;
+            currentFrame = 0;
+            currentLine = 0;
+            frameCounter = 0;
+            frameRec = { 0, 0, frameWidth, frameHeight };
+            deathCount = 3;
+            shootingTimer = 0;
             Player::Init(position, size, speed, gravity, jumpVelocity, health, direction,  bullets, isAlive);
          }
          
@@ -45,6 +47,7 @@ void Player::Init(Vector2 position, Vector2 size, float speed, float gravity, fl
     this->isAlive = isAlive;
     this->direction = direction;
     this->health = health;
+    this->shootingTimer = 0;
     invinsibleFrames = 60;
     currentInvinsibleFrame = 0;
     invinsible = false;
@@ -100,6 +103,7 @@ void Player::Update() {
 
     if (IsKeyPressed(KEY_E))
     {
+        isShooting = true;
         Vector2 spawnPoint;
         if (direction == 1) {
             spawnPoint = {position.x + size.x, position.y + size.y / 2};
@@ -143,6 +147,14 @@ void Player::Update() {
     frameRec.x = frameWidth*currentFrame;
     frameRec.y = frameHeight*currentLine;
 
+    if (isShooting) {
+        shootingTimer += GetFrameTime();
+        if (shootingTimer >= 0.1f) {
+            isShooting = false;
+            shootingTimer = 0;
+        }
+    }
+
 }
 
 void Player::OnHit(int damage){
@@ -166,10 +178,15 @@ void Player::OnDeath(){
 void Player::Draw() {
     if (health >= 0) {
         if (!invinsible || (currentInvinsibleFrame / 5) % 2 == 0) { 
+            if(isShooting){
+                DrawTextureRec(characterShoot, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+            }else{
             if (currentSpeed > 0) {
                 DrawTextureRec(characterWalk, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
             } else {
-                DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+
+                    DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+                }
             }
         }
     }

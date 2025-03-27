@@ -20,6 +20,7 @@ public:
     bool isHit;
     bool isAlive;
     bool invinsible;
+    bool isShooting;
     float playerVelocityY;
     int direction;
     Vector2 position;
@@ -34,6 +35,7 @@ private:
     float jumpVelocity;
     Texture2D characterIdle;
     Texture2D characterWalk;
+    Texture2D characterShoot;
     Texture2D hearts;
     Rectangle frameRec;
 
@@ -46,6 +48,8 @@ private:
     float heartsFrameWidth;
     float heartsFrameHeight;
     float currentSpeed;
+    float shootingTimer;
+
     int currentFrame;
     int currentLine;
     int frameCounter;

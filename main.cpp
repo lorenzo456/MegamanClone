@@ -418,7 +418,7 @@ int main(void)
     bool firstFrameHomeScreen = false;
 
     GameState gameState = START;
-    int currentLevel = 1;
+    int currentLevel = 2;
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -444,6 +444,7 @@ int main(void)
                 init_level_1(obstacles, enemies, bullets);
                 player1.Init({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, 3, 1, bullets, true);
                 has_init_level1 = true;
+                has_init_level2 = false;
             }           
             else if(!has_init_level2 && currentLevel == 2)
             {
@@ -451,35 +452,35 @@ int main(void)
                 init_level_2(obstacles, enemies, bullets, player1);
                 has_init_level2 = true;
             }
-                //Check directions
-                CheckPlayerEnemyProximity(player1, enemies);
+            //Check directions
+            CheckPlayerEnemyProximity(player1, enemies);
 
-                //Check colissions
-                CheckForCollisions(player1, obstacles);
-                CheckBulletCollision(bullets, enemies);
-                CheckBulletPlayerCollision(bullets, &player1);
-                CheckObstacleEnemyCollision(obstacles, enemies);
+            //Check colissions
+            CheckForCollisions(player1, obstacles);
+            CheckBulletCollision(bullets, enemies);
+            CheckBulletPlayerCollision(bullets, &player1);
+            CheckObstacleEnemyCollision(obstacles, enemies);
 
 
-                //Update functions
-                player1.Update();
-                if (!player1.isAlive)
-                {
-                    gameState = GAMEOVER;
-                }
-                
-                UpdateBullets(bullets);
-                UpdateEnemies(enemies);
-                MoveEnemiesToPlayerIfClose(player1, enemies, 200);
+            //Update functions
+            player1.Update();
+            if (!player1.isAlive)
+            {
+                gameState = GAMEOVER;
+            }
+            
+            UpdateBullets(bullets);
+            UpdateEnemies(enemies);
+            MoveEnemiesToPlayerIfClose(player1, enemies, 200);
 
-                if (enemies.empty() || std::all_of(enemies.begin(), enemies.end(), [](Enemy* e) { return !e->isActive; }))
-                {
-                    currentLevel++;
-                }                
-                
+            if (enemies.empty() || std::all_of(enemies.begin(), enemies.end(), [](Enemy* e) { return !e->isActive; }))
+            {
+                currentLevel++;
+            }                
+            
 
-                Draw(player1, obstacles, enemies, bullets);
-                GarbageCollection(enemies, bullets);
+            Draw(player1, obstacles, enemies, bullets);
+            GarbageCollection(enemies, bullets);
 
         }else if (gameState == START)
         {

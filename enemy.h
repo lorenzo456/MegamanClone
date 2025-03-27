@@ -23,6 +23,7 @@ public:
     float velocityY;
     Texture2D characterIdle;
     Texture2D characterWalk;
+    Texture2D characterShoot;
     Rectangle frameRec;
     Vector2 position;
     Vector2 size;
@@ -42,6 +43,10 @@ private:
     int currentFrame;
     int currentLine;
     int frameCounter;
+    float currentSpeed;
+    float shootingTimer;
+    bool isShooting;
+
     Sound laser2;
     Sound hitSound;
     Vector2 bulletSpawnpoint;    
