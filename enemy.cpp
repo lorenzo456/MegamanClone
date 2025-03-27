@@ -11,6 +11,14 @@ Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::ve
         enemies.push_back(this);
         laser2 = LoadSound("Sounds/Laser/laser2.wav");
         hitSound = LoadSound("Sounds/Hit/hit.wav");
+        characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
+        characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
+        frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
+        frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
+        currentFrame = 0;
+        currentLine = 0;
+        frameCounter = 0;
+        frameRec = { 0, 0, frameWidth, frameHeight };
         isHit = false;
         velocityY = 0;
     }
@@ -49,13 +57,29 @@ void Enemy::Update() {
             Shoot();
             shootTimer = 0.0f;
             initShootDelay = 0;
-            // std::cout << "Enemy Shoot" << std::endl;
         }
-    }else if (enemyType == 1)
-    {
-
     }
 
+    frameCounter++;
+    if (frameCounter > 2)
+    {
+        currentFrame++;
+
+        if (currentFrame >= 11)
+        {
+            currentFrame = 0;
+            currentLine++;
+
+            if (currentLine >= 1)
+            {
+                currentLine = 0;
+            }
+        }
+
+        frameCounter = 0;
+    }
+    frameRec.x = frameWidth*currentFrame;
+    frameRec.y = frameHeight*currentLine;
 }
 
 void Enemy::FollowPlayer(Vector2 playerDirection)
@@ -70,9 +94,8 @@ void Enemy::FollowPlayer(Vector2 playerDirection)
 }
 
 void Enemy::Draw() {
-    if (isActive) {
-        DrawRectangle(position.x, position.y, size.x, size.y, RED);
-    }
+    DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width * direction, frameRec.height }, position, WHITE);
+
 }
 
 Rectangle Enemy::GetRectangle() {

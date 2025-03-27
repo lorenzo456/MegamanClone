@@ -21,6 +21,9 @@ public:
     bool isHit;
     bool follow;
     float velocityY;
+    Texture2D characterIdle;
+    Texture2D characterWalk;
+    Rectangle frameRec;
     Vector2 position;
     Vector2 size;
 
@@ -32,6 +35,13 @@ private:
     float shootTimer = 0.0f;
     float shootDelay;
     float initShootDelay;
+    float frameWidth; 
+    float frameHeight;          
+    float heartsFrameWidth;
+    float heartsFrameHeight;
+    int currentFrame;
+    int currentLine;
+    int frameCounter;
     Sound laser2;
     Sound hitSound;
     Vector2 bulletSpawnpoint;    
