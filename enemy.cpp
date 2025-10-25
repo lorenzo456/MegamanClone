@@ -9,11 +9,11 @@ Enemy::Enemy(Vector2 position, Vector2 size, float speed, int enemyType, std::ve
     {
         initShootDelay = static_cast<float>(GetRandomValue(0, 10)) / 10.0f;
         enemies.push_back(this);
-        laser2 = LoadSound("Sounds/Laser/laser2.wav");
-        hitSound = LoadSound("Sounds/Hit/hit.wav");
-        characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
-        characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
-        characterShoot = LoadTexture("Sprites/VirtualGuy/Shoot(32x32).png");
+        laser2 = LoadSound("../Sounds/Laser/laser2.wav");
+        hitSound = LoadSound("../Sounds/Hit/hit.wav");
+        characterIdle = LoadTexture("../Sprites/VirtualGuy/Idle(32x32).png");
+        characterWalk = LoadTexture("../Sprites/VirtualGuy/Run(32x32).png");
+        characterShoot = LoadTexture("../Sprites/VirtualGuy/Shoot(32x32).png");
         frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
         frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
         currentFrame = 0;

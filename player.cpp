@@ -7,18 +7,18 @@
 Player::Player(Vector2 position, Vector2 size, float speed, float gravity, float jumpVelocity, std::vector<Bullet*> &bullets)
          : position(position), size(size), speed(speed), gravity(gravity), jumpVelocity(jumpVelocity), isJumping(false), playerVelocityY(0.0f), health(3), direction(1), bullets(bullets), isAlive(true)
          {
-            hearts = LoadTexture("Sprites/Hearts/HealthUI.png");
+            hearts = LoadTexture("../Sprites/Hearts/HealthUI.png");
             hearts.width *= 5;
             hearts.height *= 5;
             heartsFrameWidth = (float)(hearts.width/1);   // Sprite one frame rectangle width
             heartsFrameHeight = (float)(hearts.height/7);           // Sprite one frame rectangle height
 
-            characterIdle = LoadTexture("Sprites/VirtualGuy/Idle(32x32).png");
-            characterWalk = LoadTexture("Sprites/VirtualGuy/Run(32x32).png");
-            characterShoot = LoadTexture("Sprites/VirtualGuy/Shoot(32x32).png");
-            laser = LoadSound("Sounds/Laser/laser1.wav");
-            jumpSound = LoadSound("Sounds/Jump/jump.wav");
-            hitSound = LoadSound("Sounds/Hit/hit.wav");
+            characterIdle = LoadTexture("../Sprites/VirtualGuy/Idle(32x32).png");
+            characterWalk = LoadTexture("../Sprites/VirtualGuy/Run(32x32).png");
+            characterShoot = LoadTexture("../Sprites/VirtualGuy/Shoot(32x32).png");
+            laser = LoadSound("../Sounds/Laser/laser1.wav");
+            jumpSound = LoadSound("../Sounds/Jump/jump.wav");
+            hitSound = LoadSound("../Sounds/Hit/hit.wav");
             frameWidth = (float)(characterIdle.width/11);   // Sprite one frame rectangle width
             frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
             currentFrame = 0;

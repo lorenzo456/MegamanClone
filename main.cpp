@@ -5,6 +5,7 @@
 #include "obstacle.h"
 #include "bullet.h"
 #include "enemy.h"
+#include "boss.h"
 #include <cmath>
 using namespace std;
 //------------------------------------------------------------------------------------
@@ -67,19 +68,19 @@ void SwitchMusic(Music &currentSong, string name)
 {
 
     if (name == "menu"){
-        Music musicMenu = LoadMusicStream("Music/Menu.mp3");
+        Music musicMenu = LoadMusicStream("../Music/Menu.mp3");
         StopMusicStream(currentSong);
         UnloadMusicStream(currentSong);
         currentSong = musicMenu;
         PlayMusicStream(musicMenu);
     }else if (name == "main"){
-        Music musicMain = LoadMusicStream("Music/Main.mp3");
+        Music musicMain = LoadMusicStream("../Music/Main.mp3");
         StopMusicStream(currentSong);
         UnloadMusicStream(currentSong);
         currentSong = musicMain;
         PlayMusicStream(musicMain);
     }else if (name == "gameOver"){
-        Music musicGameOver = LoadMusicStream("Music/GameOver.mp3");
+        Music musicGameOver = LoadMusicStream("../Music/GameOver.mp3");
         StopMusicStream(currentSong);
         UnloadMusicStream(currentSong);
         currentSong = musicGameOver;
@@ -232,6 +233,16 @@ void CheckPlayerEnemyProximity(Player& player, std::vector<Enemy*>& enemies)
     }
 }
 
+void init_boss_level(std::vector<Obstacle*> &obstacles)
+{
+    new Obstacle({0, 420},   {800,40}, obstacles);  // Floor (Y = 420)
+    new Obstacle({0, 300},   {200, 40}, obstacles);  // Left lower platform (Y = 330)
+    new Obstacle({80, 180}, {200, 40}, obstacles); // Mid-left platform (Y = 210)
+    new Obstacle({300, 90}, {200, 40}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({345, 250}, {100, 40}, obstacles);  // High-up left platform (Y = 110)
+    new Obstacle({800 - 190, 330}, {200, 40}, obstacles);  // Mirrored right lower platform (Y = 330)
+    new Obstacle({800 - 90 - 200, 210}, {200, 40}, obstacles);  // Mirrored mid-right platform (Y = 210)
+}
 
 void init_level_1(std::vector<Obstacle*> &obstacles, std::vector<Enemy*>&enemies, std::vector<Bullet*>&bullets)
 {
@@ -389,9 +400,9 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "MegaMan Example");
     InitAudioDevice();
 
-    Music musicMain = LoadMusicStream("Music/Main.mp3");
-    Music musicMenu = LoadMusicStream("Music/Menu.mp3");
-    Music musicGameOver = LoadMusicStream("Music/GameOver.mp3");
+    Music musicMain = LoadMusicStream("../Music/Main.mp3");
+    Music musicMenu = LoadMusicStream("../Music/Menu.mp3");
+    Music musicGameOver = LoadMusicStream("../Music/GameOver.mp3");
     Music currentMusic = { 0 };
     float timeMusicPlayed = 0.0f;        // Time played normalized [0.0f..1.0f]
 
@@ -411,8 +422,10 @@ int main(void)
     std::vector<Enemy*> enemies;
 
     Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
+    Boss boss1({600, 50}, {80, 80});
     bool has_init_level1 = false;
     bool has_init_level2 = false;
+    bool has_init_level3 = false;
 
     bool firstGameOverFrame = false;
     bool firstFrameHomeScreen = false;
@@ -434,7 +447,7 @@ int main(void)
 
         if(gameState == GAME)
         {
-
+            currentLevel = 3;
             if(!has_init_level1 && currentLevel == 1)
             {
                 firstGameOverFrame = false;
@@ -451,7 +464,17 @@ int main(void)
                 GarbageCollection(enemies, bullets, true);
                 init_level_2(obstacles, enemies, bullets, player1);
                 has_init_level2 = true;
-            }
+            }else if(currentLevel > 2)
+            {
+                if(!has_init_level3)
+                {
+                    GarbageCollection(enemies, bullets, true);
+                    obstacles.clear();
+                    init_boss_level(obstacles);
+                    has_init_level3 = true;
+                }
+            }   
+
             //Check directions
             CheckPlayerEnemyProximity(player1, enemies);
 
@@ -469,6 +492,10 @@ int main(void)
                 gameState = GAMEOVER;
             }
             
+            if(has_init_level3){
+                boss1.Update();
+            }
+
             UpdateBullets(bullets);
             UpdateEnemies(enemies);
             MoveEnemiesToPlayerIfClose(player1, enemies, 200);
@@ -479,6 +506,9 @@ int main(void)
             }                
             
 
+            if(has_init_level3){
+                boss1.Draw();
+            }
             Draw(player1, obstacles, enemies, bullets);
             GarbageCollection(enemies, bullets);
 

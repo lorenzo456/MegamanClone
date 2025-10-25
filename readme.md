@@ -65,7 +65,7 @@ This is a simple game project that uses the Raylib library for graphics renderin
 
 ---
 
-## How to Run the Project
+## How to Run the Project on Linux
 
 1. **Download or clone the project**:
    If you haven't already, download or clone the project:
@@ -88,6 +88,18 @@ This is a simple game project that uses the Raylib library for graphics renderin
 
 ---
 
+## How to Run the Project on Windows
+
+1. **Build the project**:
+   Open the terminal and run the `CMake` command to compile the project:
+   `cmake .. -G "MinGW Makefiles"`
+   Then the `mingw32-make` command
+
+2. **Run the game**:
+   Once the project has been successfully compiled, run the game with the following command:
+   `./MyGame.exe`
+
+---
 ## Troubleshooting
 
 - **Error: `make: command not found`**  
