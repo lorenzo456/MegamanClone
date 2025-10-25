@@ -17,7 +17,9 @@ public:
     int health = 15;
     Vector2 position;
     Vector2 size;
-
+    bool isHit = false;
+    bool isActive = true;
+    bool isInvulnerable = false;
 private:
     std::vector<Bullet*>&bullets; 
     enum class MovementPhase {
@@ -38,6 +40,7 @@ private:
     float speed = 2.0f;
     int direction = 1; 
     void Shoot();
+    Sound hitSound;
     Sound laser2;
 };
 

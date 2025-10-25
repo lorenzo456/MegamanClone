@@ -7,13 +7,31 @@ Boss::Boss(Vector2 position, Vector2 size, std::vector<Bullet*>& bullets)
     : position(position), size(size), bullets(bullets)
 {
     laser2 = LoadSound("../Sounds/Laser/laser2.wav");
+    hitSound = LoadSound("../Sounds/Hit/hit.wav");
     currentPhase = MovementPhase::TOP_RIGHT;
     currentShootPhase = ShootPhase::TRAVEL;
     speed = 2.0f; // adjust as needed
+    isHit = false;
+    isActive = true;
 }
 
 void Boss::Update() 
 {
+
+    if (isHit) {
+        health--;
+        PlaySound(hitSound);
+        isHit = false;
+    }
+
+    if (health <= 0) {
+        isActive = false;
+    }
+
+    if (!isActive) {
+        return;
+    }
+
     constexpr float SCREEN_WIDTH = 780.0f;
     constexpr float SCREEN_HEIGHT = 420.0f;
 
@@ -23,6 +41,7 @@ void Boss::Update()
         static double lastShotTime = -1000.0;
         static int shotsFired = 0;
         double now = GetTime();
+        isInvulnerable = false;
 
         // Check if visually in a corner
         bool inCorner =
@@ -47,6 +66,7 @@ void Boss::Update()
     // Movement logic
     if (currentShootPhase == ShootPhase::TRAVEL)
     {
+        isInvulnerable = true;
         switch (currentPhase) {
             case MovementPhase::TOP_RIGHT:
                 if (position.x + size.x < SCREEN_WIDTH)
@@ -131,8 +151,9 @@ void Boss::Shoot()
     } else {
         return; // not in a corner → do not shoot
     }
-
+    
     // Compute normalized direction
+    float forwardOffset = 100.0f;
     Vector2 dir = { target.x - center.x, target.y - center.y };
     float len = sqrtf(dir.x*dir.x + dir.y*dir.y);
     if (len != 0.0f) {
@@ -143,15 +164,21 @@ void Boss::Shoot()
     // Perpendicular vector for bullet spread
     Vector2 perp = { -dir.y, dir.x };
 
-    for (int i = 0; i < BULLET_COUNT; ++i) {
-        float offset = (i - (BULLET_COUNT-1)/2.0f) * SPREAD;
-        Vector2 spawnPos = { center.x + perp.x * offset, center.y + perp.y * offset };
-        Vector2 velocity = { dir.x * BULLET_SPEED, dir.y * BULLET_SPEED };
+for (int i = 0; i < BULLET_COUNT; ++i) {
+    float offset = ((i - (BULLET_COUNT-1)/2.0f) * SPREAD);
 
-        Bullet* bullet = new Bullet(spawnPos, {10,5}, velocity, 10.0f);
-        bullet->isActive = true;
-        bullets.push_back(bullet);
-    }
+    // spawn position: center + forward offset along dir + perpendicular spread
+    Vector2 spawnPos = {
+        center.x + dir.x * forwardOffset + perp.x * offset,
+        center.y + dir.y * forwardOffset + perp.y * offset
+    };
+
+    Vector2 velocity = { dir.x * BULLET_SPEED, dir.y * BULLET_SPEED };
+
+    Bullet* bullet = new Bullet(spawnPos, {10,5}, velocity, 10.0f);
+    bullet->isActive = true;
+    bullets.push_back(bullet);
+}
 
     PlaySound(laser2);
 }

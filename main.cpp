@@ -180,6 +180,22 @@ void CheckBulletPlayerCollision(std::vector<Bullet*>& bullets, Player* player)
     }
 }
 
+void CheckBulletBossCollision(std::vector<Bullet*>& bullets, Boss& boss)
+{
+    for (Bullet* bullet : bullets)
+    {
+            if (CheckCollisionRecsDirection(bullet->GetRectangle(), boss.GetRectangle()) != NONE)
+            {
+                CollisionDirection collision = CheckCollisionRecsDirection(bullet->GetRectangle(), boss.GetRectangle());
+                if (collision != NONE && boss.isInvulnerable == false && boss.isActive)
+                {
+                    bullet->isActive = false;
+                    boss.isHit = true;
+                }
+            }
+    }
+}
+
 void CheckObstacleEnemyCollision(std::vector<Obstacle*>& obstacles, std::vector<Enemy*>& enemies)
 {
     for (Obstacle* obstacle : obstacles)
@@ -348,7 +364,7 @@ void UpdateGameOverScreen(GameState& gameState, const char* titleText, const cha
     EndDrawing();
 }
 
-void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*> &enemies, std::vector<Bullet*> &bullets)
+void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*> &enemies, std::vector<Bullet*> &bullets, Boss &boss1)
 {
     
         // Draw
@@ -359,6 +375,10 @@ void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*>
             DrawBackground(obstacles);
             DrawEnemies(enemies);
             DrawBullets(bullets);
+            if(boss1.isActive){
+                boss1.Draw();
+            }
+
         EndDrawing();
         //----------------------------------------------------------------------------------
 }
@@ -447,7 +467,7 @@ int main(void)
 
         if(gameState == GAME)
         {
-            // currentLevel = 3;
+            currentLevel = 3;
             if(!has_init_level1 && currentLevel == 1)
             {
                 firstGameOverFrame = false;
@@ -483,6 +503,7 @@ int main(void)
             CheckBulletCollision(bullets, enemies);
             CheckBulletPlayerCollision(bullets, &player1);
             CheckObstacleEnemyCollision(obstacles, enemies);
+            CheckBulletBossCollision(bullets, boss1);
 
 
             //Update functions
@@ -492,13 +513,14 @@ int main(void)
                 gameState = GAMEOVER;
             }
             
-            if(has_init_level3){
-                boss1.Update();
-            }
+
 
             UpdateBullets(bullets);
             UpdateEnemies(enemies);
             MoveEnemiesToPlayerIfClose(player1, enemies, 200);
+            if(has_init_level3){
+                boss1.Update();
+            }
 
             if (enemies.empty() || std::all_of(enemies.begin(), enemies.end(), [](Enemy* e) { return !e->isActive; }))
             {
@@ -506,10 +528,8 @@ int main(void)
             }                
             
 
-            if(has_init_level3){
-                boss1.Draw();
-            }
-            Draw(player1, obstacles, enemies, bullets);
+
+            Draw(player1, obstacles, enemies, bullets, boss1);
             GarbageCollection(enemies, bullets);
 
         }else if (gameState == START)
