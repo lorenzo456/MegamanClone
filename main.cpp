@@ -422,7 +422,7 @@ int main(void)
     std::vector<Enemy*> enemies;
 
     Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
-    Boss boss1({600, 50}, {80, 80});
+    Boss boss1({600, 50}, {80, 80}, bullets);
     bool has_init_level1 = false;
     bool has_init_level2 = false;
     bool has_init_level3 = false;
@@ -447,7 +447,7 @@ int main(void)
 
         if(gameState == GAME)
         {
-            currentLevel = 3;
+            // currentLevel = 3;
             if(!has_init_level1 && currentLevel == 1)
             {
                 firstGameOverFrame = false;

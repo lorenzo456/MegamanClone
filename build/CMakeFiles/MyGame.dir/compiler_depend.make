@@ -51,6 +51,7 @@ CMakeFiles/MyGame.dir/boss.cpp.obj: C:/Development/Games/MegamanClone/boss.cpp \
   C:/msys64/ucrt64/include/c++/15.2.0/bits/range_access.h \
   C:/msys64/ucrt64/include/c++/15.2.0/bits/refwrap.h \
   C:/msys64/ucrt64/include/c++/15.2.0/bits/requires_hosted.h \
+  C:/msys64/ucrt64/include/c++/15.2.0/bits/specfun.h \
   C:/msys64/ucrt64/include/c++/15.2.0/bits/std_abs.h \
   C:/msys64/ucrt64/include/c++/15.2.0/bits/stl_algobase.h \
   C:/msys64/ucrt64/include/c++/15.2.0/bits/stl_bvector.h \
@@ -74,6 +75,7 @@ CMakeFiles/MyGame.dir/boss.cpp.obj: C:/Development/Games/MegamanClone/boss.cpp \
   C:/msys64/ucrt64/include/c++/15.2.0/cctype \
   C:/msys64/ucrt64/include/c++/15.2.0/cerrno \
   C:/msys64/ucrt64/include/c++/15.2.0/clocale \
+  C:/msys64/ucrt64/include/c++/15.2.0/cmath \
   C:/msys64/ucrt64/include/c++/15.2.0/concepts \
   C:/msys64/ucrt64/include/c++/15.2.0/cstddef \
   C:/msys64/ucrt64/include/c++/15.2.0/cstdio \
@@ -93,6 +95,7 @@ CMakeFiles/MyGame.dir/boss.cpp.obj: C:/Development/Games/MegamanClone/boss.cpp \
   C:/msys64/ucrt64/include/c++/15.2.0/iosfwd \
   C:/msys64/ucrt64/include/c++/15.2.0/iostream \
   C:/msys64/ucrt64/include/c++/15.2.0/istream \
+  C:/msys64/ucrt64/include/c++/15.2.0/limits \
   C:/msys64/ucrt64/include/c++/15.2.0/new \
   C:/msys64/ucrt64/include/c++/15.2.0/ostream \
   C:/msys64/ucrt64/include/c++/15.2.0/pstl/pstl_config.h \
@@ -102,6 +105,18 @@ CMakeFiles/MyGame.dir/boss.cpp.obj: C:/Development/Games/MegamanClone/boss.cpp \
   C:/msys64/ucrt64/include/c++/15.2.0/string \
   C:/msys64/ucrt64/include/c++/15.2.0/string_view \
   C:/msys64/ucrt64/include/c++/15.2.0/system_error \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/bessel_function.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/beta_function.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/ell_integral.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/exp_integral.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/gamma.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/hypergeometric.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/legendre_function.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/modified_bessel_func.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/poly_hermite.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/poly_laguerre.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/riemann_zeta.tcc \
+  C:/msys64/ucrt64/include/c++/15.2.0/tr1/special_function_util.h \
   C:/msys64/ucrt64/include/c++/15.2.0/tuple \
   C:/msys64/ucrt64/include/c++/15.2.0/type_traits \
   C:/msys64/ucrt64/include/c++/15.2.0/typeinfo \
@@ -128,6 +143,7 @@ CMakeFiles/MyGame.dir/boss.cpp.obj: C:/Development/Games/MegamanClone/boss.cpp \
   C:/msys64/ucrt64/include/limits.h \
   C:/msys64/ucrt64/include/locale.h \
   C:/msys64/ucrt64/include/malloc.h \
+  C:/msys64/ucrt64/include/math.h \
   C:/msys64/ucrt64/include/process.h \
   C:/msys64/ucrt64/include/pthread.h \
   C:/msys64/ucrt64/include/pthread_compat.h \
@@ -866,11 +882,11 @@ C:/msys64/ucrt64/include/c++/15.2.0/bits/functional_hash.h:
 
 C:/msys64/ucrt64/include/c++/15.2.0/bits/streambuf_iterator.h:
 
-C:/msys64/ucrt64/include/c++/15.2.0/bits/specfun.h:
-
 C:/msys64/ucrt64/include/c++/15.2.0/string:
 
 C:/msys64/ucrt64/include/c++/15.2.0/bits/hash_bytes.h:
+
+C:/msys64/ucrt64/include/c++/15.2.0/bits/specfun.h:
 
 C:/msys64/ucrt64/include/c++/15.2.0/bits/invoke.h:
 
@@ -934,6 +950,10 @@ C:/msys64/ucrt64/include/c++/15.2.0/cctype:
 
 C:/msys64/ucrt64/include/c++/15.2.0/cerrno:
 
+C:/msys64/ucrt64/include/wctype.h:
+
+C:/msys64/ucrt64/include/c++/15.2.0/cmath:
+
 C:/msys64/ucrt64/include/c++/15.2.0/concepts:
 
 C:/msys64/ucrt64/include/c++/15.2.0/cstddef:
@@ -968,6 +988,8 @@ C:/msys64/ucrt64/include/c++/15.2.0/iosfwd:
 
 C:/msys64/ucrt64/include/c++/15.2.0/iostream:
 
+C:/msys64/ucrt64/include/c++/15.2.0/limits:
+
 C:/msys64/ucrt64/include/c++/15.2.0/new:
 
 C:/msys64/ucrt64/include/c++/15.2.0/ostream:
@@ -983,6 +1005,20 @@ C:/msys64/ucrt64/include/c++/15.2.0/streambuf:
 C:/msys64/ucrt64/include/c++/15.2.0/string_view:
 
 C:/msys64/ucrt64/include/c++/15.2.0/system_error:
+
+C:/msys64/ucrt64/include/c++/15.2.0/tr1/exp_integral.tcc:
+
+C:/msys64/ucrt64/include/c++/15.2.0/tr1/gamma.tcc:
+
+C:/msys64/ucrt64/include/c++/15.2.0/tr1/hypergeometric.tcc:
+
+C:/msys64/ucrt64/include/c++/15.2.0/tr1/legendre_function.tcc:
+
+C:/msys64/ucrt64/include/c++/15.2.0/tr1/poly_laguerre.tcc:
+
+C:/msys64/ucrt64/include/c++/15.2.0/tr1/riemann_zeta.tcc:
+
+C:/msys64/ucrt64/include/c++/15.2.0/tr1/special_function_util.h:
 
 C:/msys64/ucrt64/include/c++/15.2.0/tuple:
 
@@ -1038,6 +1074,8 @@ C:/msys64/ucrt64/include/locale.h:
 
 C:/msys64/ucrt64/include/malloc.h:
 
+C:/msys64/ucrt64/include/math.h:
+
 C:/msys64/ucrt64/include/process.h:
 
 C:/msys64/ucrt64/include/pthread.h:
@@ -1082,10 +1120,6 @@ C:/msys64/ucrt64/include/vadefs.h:
 
 C:/msys64/ucrt64/include/wchar.h:
 
-C:/msys64/ucrt64/include/c++/15.2.0/cmath:
-
-C:/msys64/ucrt64/include/wctype.h:
-
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/limits.h:
 
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/mm_malloc.h:
@@ -1117,24 +1151,6 @@ C:/msys64/ucrt64/include/c++/15.2.0/bits/uniform_int_dist.h:
 C:/msys64/ucrt64/include/c++/15.2.0/pstl/glue_algorithm_defs.h:
 
 C:/Development/Games/MegamanClone/main.cpp:
-
-C:/msys64/ucrt64/include/c++/15.2.0/limits:
-
-C:/msys64/ucrt64/include/c++/15.2.0/tr1/exp_integral.tcc:
-
-C:/msys64/ucrt64/include/c++/15.2.0/tr1/gamma.tcc:
-
-C:/msys64/ucrt64/include/c++/15.2.0/tr1/hypergeometric.tcc:
-
-C:/msys64/ucrt64/include/c++/15.2.0/tr1/legendre_function.tcc:
-
-C:/msys64/ucrt64/include/c++/15.2.0/tr1/poly_laguerre.tcc:
-
-C:/msys64/ucrt64/include/c++/15.2.0/tr1/riemann_zeta.tcc:
-
-C:/msys64/ucrt64/include/c++/15.2.0/tr1/special_function_util.h:
-
-C:/msys64/ucrt64/include/math.h:
 
 C:/Development/Games/MegamanClone/obstacle.h:
 

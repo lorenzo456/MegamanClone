@@ -8,7 +8,7 @@
 
 class Boss {
 public:
-    Boss(Vector2 position, Vector2 size);
+    Boss(Vector2 position, Vector2 size, std::vector<Bullet*>&bullets);
 
     void Update();
     void Draw();
