@@ -13,6 +13,14 @@ Boss::Boss(Vector2 position, Vector2 size, std::vector<Bullet*>& bullets)
     speed = 2.0f; // adjust as needed
     isHit = false;
     isActive = true;
+
+    characterIdle = LoadTexture("../Sprites/Boss/boss.png");
+    frameWidth = (float)(characterIdle.width/3);   // Sprite one frame rectangle width
+    frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
+    currentFrame = 0;
+    currentLine = 0;
+    frameCounter = 0;
+    frameRec = { 0, 0, frameWidth, frameHeight };
 }
 
 void Boss::Update() 
@@ -21,6 +29,7 @@ void Boss::Update()
     if (isHit) {
         health--;
         PlaySound(hitSound);
+        skipFrame = true;
         isHit = false;
     }
 
@@ -125,6 +134,7 @@ void Boss::Update()
                 break;
         }
     }
+    UpdateFrameRec();
 }
 
 void Boss::Shoot() 
@@ -183,9 +193,37 @@ for (int i = 0; i < BULLET_COUNT; ++i) {
     PlaySound(laser2);
 }
 
+void Boss::UpdateFrameRec()
+{
+    frameCounter++;
+    if (frameCounter >= 10) // Change frame every 10 updates
+    {
+        currentFrame++;
+        if (currentFrame >= 3) // Assuming 3 frames in the sprite sheet
+        {
+            currentFrame = 0;
+        }
+        frameCounter = 0;
+    }
+    frameRec.x = frameWidth * currentFrame;
+    frameRec.y = frameHeight * currentLine;
+}
+
 void Boss::Draw() 
 {
-    DrawRectangle(position.x, position.y, size.x, size.y, RED);
+    // DrawRectangle(position.x, position.y, size.x, size.y, RED);
+    if (skipFrame)
+    {
+        skipFrame = false;
+        return;
+    }
+    
+    Rectangle sourceRec = frameRec; // portion of the texture to draw
+    Rectangle destRec = { position.x, position.y, frameRec.width, frameRec.height }; // rectangle on screen
+    Vector2 origin = { 0, 0 }; // no rotation
+    DrawTexturePro(characterIdle, sourceRec, destRec, origin, 0.0f, WHITE);
+
+    // DrawTextureRec(characterIdle, { frameRec.x, frameRec.y, frameRec.width, frameRec.height }, position, WHITE);
 }
 
 Rectangle Boss::GetRectangle() 
