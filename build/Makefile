@@ -128,6 +128,30 @@ MyGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/build
 .PHONY : MyGame/fast
 
+boss.obj: boss.cpp.obj
+.PHONY : boss.obj
+
+# target to build an object file
+boss.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/boss.cpp.obj
+.PHONY : boss.cpp.obj
+
+boss.i: boss.cpp.i
+.PHONY : boss.i
+
+# target to preprocess a source file
+boss.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/boss.cpp.i
+.PHONY : boss.cpp.i
+
+boss.s: boss.cpp.s
+.PHONY : boss.s
+
+# target to generate assembly for a file
+boss.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/boss.cpp.s
+.PHONY : boss.cpp.s
+
 bullet.obj: bullet.cpp.obj
 .PHONY : bullet.obj
 
@@ -257,6 +281,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... MyGame
+	@echo ... boss.obj
+	@echo ... boss.i
+	@echo ... boss.s
 	@echo ... bullet.obj
 	@echo ... bullet.i
 	@echo ... bullet.s

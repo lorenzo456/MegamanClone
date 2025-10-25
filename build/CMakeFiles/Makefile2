@@ -84,12 +84,12 @@ clean: CMakeFiles/MyGame.dir/clean
 CMakeFiles/MyGame.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target MyGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target MyGame"
 .PHONY : CMakeFiles/MyGame.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MyGame.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Development\Games\MegamanClone\build\CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Development\Games\MegamanClone\build\CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/MyGame.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Development\Games\MegamanClone\build\CMakeFiles 0
 .PHONY : CMakeFiles/MyGame.dir/rule
@@ -101,7 +101,7 @@ MyGame: CMakeFiles/MyGame.dir/rule
 # codegen rule for target.
 CMakeFiles/MyGame.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target MyGame"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Finished codegen for target MyGame"
 .PHONY : CMakeFiles/MyGame.dir/codegen
 
 # clean rule for target.

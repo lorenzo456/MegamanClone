@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Development/Games/MegamanClone/boss.cpp" "CMakeFiles/MyGame.dir/boss.cpp.obj" "gcc" "CMakeFiles/MyGame.dir/boss.cpp.obj.d"
   "C:/Development/Games/MegamanClone/bullet.cpp" "CMakeFiles/MyGame.dir/bullet.cpp.obj" "gcc" "CMakeFiles/MyGame.dir/bullet.cpp.obj.d"
   "C:/Development/Games/MegamanClone/enemy.cpp" "CMakeFiles/MyGame.dir/enemy.cpp.obj" "gcc" "CMakeFiles/MyGame.dir/enemy.cpp.obj.d"
   "C:/Development/Games/MegamanClone/main.cpp" "CMakeFiles/MyGame.dir/main.cpp.obj" "gcc" "CMakeFiles/MyGame.dir/main.cpp.obj.d"
