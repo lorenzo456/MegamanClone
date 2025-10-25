@@ -20,6 +20,7 @@ public:
     bool isHit = false;
     bool isActive = true;
     bool isInvulnerable = false;
+    bool initialized = false;
 
 private:
     std::vector<Bullet*>&bullets; 

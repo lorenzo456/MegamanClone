@@ -344,6 +344,28 @@ void UpdateHomeScreen(GameState& gameState, const char* titleText, const char* s
     EndDrawing();
 }
 
+void UpdateEndScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth, Music &currentMusic, Music &musicHomeScreen,bool &firstEndFrame)
+{
+    if(!firstEndFrame)
+    {
+        SwitchMusic(currentMusic, "menu");
+        firstEndFrame = true;
+        std::cout << "LOAD MUSIC HOME" <<endl;
+    }
+
+
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        gameState = START;
+    }
+
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    DrawText(titleText, (screenWidth / 2) - (titleWidth / 2), screenHeight / 2 - 20, 20, LIGHTGRAY);
+    DrawText(startText, (screenWidth / 2) - (startWidth / 2), screenHeight / 2 + 10, 20, LIGHTGRAY);
+    EndDrawing();
+}
+
 void UpdateGameOverScreen(GameState& gameState, const char* titleText, const char* startText, int screenWidth, int screenHeight, int titleWidth, int startWidth, Music &currentMusic, Music &musicGameOver,bool &firstGameOverFrame)
 {
     if(!firstGameOverFrame)
@@ -375,7 +397,7 @@ void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*>
             DrawBackground(obstacles);
             DrawEnemies(enemies);
             DrawBullets(bullets);
-            if(boss1.isActive){
+            if(boss1.isActive && boss1.initialized){
                 boss1.Draw();
             }
 
@@ -431,6 +453,11 @@ int main(void)
     const char* gameoverText = "Game Over";
     const char* restartText = "Press ENTER to Restart";
 
+    const char* endText = "Congratulations! You Win!";
+    const char* playAgainText = "Press ENTER to Play Again";
+    int endTextWidth = MeasureText(endText, 20);
+    int playAgainWidth = MeasureText(playAgainText, 20);
+
     int titleWidth = MeasureText(titleText, 20);
     int startWidth = MeasureText(startText, 20);
 
@@ -443,13 +470,16 @@ int main(void)
 
     Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
     Boss boss1({600, 50}, {80, 80}, bullets);
+    boss1.isActive = false;
+    boss1.initialized = false;
+
     bool has_init_level1 = false;
     bool has_init_level2 = false;
     bool has_init_level3 = false;
 
     bool firstGameOverFrame = false;
     bool firstFrameHomeScreen = false;
-
+    bool firstEndFrame = false;
     GameState gameState = START;
     int currentLevel = 1;
 
@@ -467,7 +497,9 @@ int main(void)
 
         if(gameState == GAME)
         {
-            currentLevel = 3;
+
+            // currentLevel = 3;
+            
             if(!has_init_level1 && currentLevel == 1)
             {
                 firstGameOverFrame = false;
@@ -492,8 +524,13 @@ int main(void)
                     obstacles.clear();
                     init_boss_level(obstacles);
                     has_init_level3 = true;
+                    boss1.isActive = true;
+                    boss1.initialized = true;
                 }
-            }   
+            }
+            
+
+              
 
             //Check directions
             CheckPlayerEnemyProximity(player1, enemies);
@@ -514,7 +551,7 @@ int main(void)
             }
             
 
-
+            
             UpdateBullets(bullets);
             UpdateEnemies(enemies);
             MoveEnemiesToPlayerIfClose(player1, enemies, 200);
@@ -522,9 +559,15 @@ int main(void)
                 boss1.Update();
             }
 
-            if (enemies.empty() || std::all_of(enemies.begin(), enemies.end(), [](Enemy* e) { return !e->isActive; }))
+            if (enemies.empty() && !boss1.initialized || std::all_of(enemies.begin(), enemies.end(), [](Enemy* e) { return !e->isActive; }) && !boss1.initialized || boss1.initialized && boss1.health <= 0 && boss1.isActive == false) 
             {
                 currentLevel++;
+                std::cout << "ADVANCE TO LEVEL " << currentLevel << endl;
+                if (currentLevel > 3)
+                {
+                    std::cout << "GAME END" << endl;
+                    gameState = END;
+                }
             }                
             
 
@@ -541,7 +584,14 @@ int main(void)
             UpdateGameOverScreen(gameState, gameoverText, restartText, screenWidth, screenHeight, gameoverWidth, restartWidth, currentMusic, musicGameOver, firstGameOverFrame);
             has_init_level1 = false;
             currentLevel = 1;
+        }else if (gameState == END)
+        {
+            has_init_level1 = false;
+            GarbageCollection(enemies, bullets, true);
+            UpdateEndScreen(gameState, endText, playAgainText, screenWidth, screenHeight, endTextWidth, playAgainWidth, currentMusic, musicMenu, firstEndFrame);
+            currentLevel = 1;
         }
+        
 
     }
 

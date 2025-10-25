@@ -13,7 +13,7 @@ Boss::Boss(Vector2 position, Vector2 size, std::vector<Bullet*>& bullets)
     speed = 2.0f; // adjust as needed
     isHit = false;
     isActive = true;
-
+    initialized = true;
     characterIdle = LoadTexture("../Sprites/Boss/boss.png");
     frameWidth = (float)(characterIdle.width/3);   // Sprite one frame rectangle width
     frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
@@ -21,6 +21,7 @@ Boss::Boss(Vector2 position, Vector2 size, std::vector<Bullet*>& bullets)
     currentLine = 0;
     frameCounter = 0;
     frameRec = { 0, 0, frameWidth, frameHeight };
+
 }
 
 void Boss::Update() 
