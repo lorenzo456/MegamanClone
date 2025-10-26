@@ -180,6 +180,20 @@ void CheckBulletPlayerCollision(std::vector<Bullet*>& bullets, Player* player)
     }
 }
 
+void CheckPlayerBossCollision(Player& player, Boss& boss)
+{
+    if (CheckCollisionRecsDirection(player.GetRectangle(), boss.GetRectangle()) != NONE)
+    {
+        CollisionDirection collision = CheckCollisionRecsDirection(player.GetRectangle(), boss.GetRectangle());
+        if (collision != NONE && boss.isActive)
+        {
+            player.OnHit(1);
+            // Knockback player
+            player.position.x += player.size.x * player.direction * -1;
+        }
+    }
+}
+
 void CheckBulletBossCollision(std::vector<Bullet*>& bullets, Boss& boss)
 {
     for (Bullet* bullet : bullets)
@@ -498,7 +512,7 @@ int main(void)
         if(gameState == GAME)
         {
 
-            // currentLevel = 3;
+            currentLevel = 3;
             
             if(!has_init_level1 && currentLevel == 1)
             {
@@ -540,7 +554,7 @@ int main(void)
             CheckBulletPlayerCollision(bullets, &player1);
             CheckObstacleEnemyCollision(obstacles, enemies);
             CheckBulletBossCollision(bullets, boss1);
-
+            CheckPlayerBossCollision(player1, boss1);
 
             //Update functions
             player1.Update();
