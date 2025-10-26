@@ -19,6 +19,30 @@ void DrawBackground(std::vector<Obstacle*> &obstacles)
     }
 }
 
+void UpdateBackgroundFrameRec(Rectangle &frameRec, int &frameCounter, int &currentFrame, float frameWidth, float frameHeight, int currentLine)
+{
+    frameCounter++;
+    if (frameCounter >= 10) // Change frame every 10 updates
+    {
+        currentFrame++;
+        if (currentFrame >= 3) // Assuming 3 frames in the sprite sheet
+        {
+            currentFrame = 0;
+        }
+        frameCounter = 0;
+    }
+    frameRec.x = frameWidth * currentFrame;
+    frameRec.y = frameHeight * currentLine;
+}
+
+void DrawGameBackground( Texture2D &background, Rectangle &frameRec, const Vector2 &position)
+{
+    Rectangle sourceRec = frameRec; // portion of the texture to draw
+    Rectangle destRec = { position.x, position.y, 800, 450 }; // rectangle on screen
+    Vector2 origin = { 0, 0 }; // no rotation
+    DrawTexturePro(background, sourceRec, destRec, origin, 0.0f, WHITE);
+}
+
 void DrawBullets(std::vector<Bullet*>& bullets)
 {
     for (Bullet* bullet : bullets)
@@ -85,6 +109,12 @@ void SwitchMusic(Music &currentSong, string name)
         UnloadMusicStream(currentSong);
         currentSong = musicGameOver;
         PlayMusicStream(musicGameOver);
+    }else if (name == "boss"){
+        Music musicBoss = LoadMusicStream("../Music/Boss.mp3");
+        StopMusicStream(currentSong);
+        UnloadMusicStream(currentSong);
+        currentSong = musicBoss;
+        PlayMusicStream(musicBoss);
     }
 
 
@@ -400,13 +430,14 @@ void UpdateGameOverScreen(GameState& gameState, const char* titleText, const cha
     EndDrawing();
 }
 
-void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*> &enemies, std::vector<Bullet*> &bullets, Boss &boss1)
+void Draw(Player player1, std::vector<Obstacle*> &obstacles, std::vector<Enemy*> &enemies, std::vector<Bullet*> &bullets, Boss &boss1, Texture2D &background, Rectangle &frameRec)
 {
     
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
             ClearBackground(RAYWHITE);
+            DrawGameBackground( background, frameRec, Vector2{0,0});
             player1.Draw();
             DrawBackground(obstacles);
             DrawEnemies(enemies);
@@ -481,6 +512,14 @@ int main(void)
     std::vector<Obstacle*> obstacles;
     std::vector<Bullet*> bullets;
     std::vector<Enemy*> enemies;
+    
+    Texture2D background = LoadTexture("../Sprites/Background/background.png");
+    float frameWidth = (float)(background.width/5);   // Sprite one frame rectangle width
+    float frameHeight = (float)(background.height/1);           // Sprite one frame rectangle height
+    int currentFrame = 0;
+    int currentLine = 0;
+    int frameCounter = 0;
+    Rectangle frameRec = { 0, 0, frameWidth, frameHeight };
 
     Player player1({50, screenHeight}, {32, 32}, 5.0f, 1.5f, -20.0f, bullets); // Adjusted size
     Boss boss1({600, 50}, {80, 80}, bullets);
@@ -512,7 +551,7 @@ int main(void)
         if(gameState == GAME)
         {
 
-            currentLevel = 3;
+            // currentLevel = 3;
             
             if(!has_init_level1 && currentLevel == 1)
             {
@@ -536,6 +575,7 @@ int main(void)
                 {
                     GarbageCollection(enemies, bullets, true);
                     obstacles.clear();
+                    SwitchMusic(currentMusic, "boss");
                     init_boss_level(obstacles);
                     has_init_level3 = true;
                     boss1.Init();
@@ -584,8 +624,10 @@ int main(void)
             }                
             
 
+            //Draw functions
+            UpdateBackgroundFrameRec( frameRec, frameCounter, currentFrame, frameWidth, frameHeight, currentLine);
 
-            Draw(player1, obstacles, enemies, bullets, boss1);
+            Draw(player1, obstacles, enemies, bullets, boss1, background, frameRec);
             GarbageCollection(enemies, bullets);
 
         }else if (gameState == START)
