@@ -524,8 +524,7 @@ int main(void)
                     obstacles.clear();
                     init_boss_level(obstacles);
                     has_init_level3 = true;
-                    boss1.isActive = true;
-                    boss1.initialized = true;
+                    boss1.Init();
                 }
             }
             
@@ -590,6 +589,10 @@ int main(void)
             GarbageCollection(enemies, bullets, true);
             UpdateEndScreen(gameState, endText, playAgainText, screenWidth, screenHeight, endTextWidth, playAgainWidth, currentMusic, musicMenu, firstEndFrame);
             currentLevel = 1;
+            boss1.Init(true);
+            has_init_level3 = false;
+            has_init_level1 = false;
+            has_init_level2 = false;
         }
         
 

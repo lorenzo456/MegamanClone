@@ -8,20 +8,32 @@ Boss::Boss(Vector2 position, Vector2 size, std::vector<Bullet*>& bullets)
 {
     laser2 = LoadSound("../Sounds/Laser/laser2.wav");
     hitSound = LoadSound("../Sounds/Hit/hit.wav");
+    characterIdle = LoadTexture("../Sprites/Boss/boss.png");
+    Init();
+}
+
+void Boss::Init(bool reset)
+{
     currentPhase = MovementPhase::TOP_RIGHT;
     currentShootPhase = ShootPhase::TRAVEL;
     speed = 2.0f; // adjust as needed
     isHit = false;
-    isActive = true;
-    initialized = true;
-    characterIdle = LoadTexture("../Sprites/Boss/boss.png");
+    health = 15;
+    if (reset)
+    {
+        isActive = false;
+        initialized = false;
+    }
+    else{
+        isActive = true;
+        initialized = true;
+    }
     frameWidth = (float)(characterIdle.width/3);   // Sprite one frame rectangle width
     frameHeight = (float)(characterIdle.height/1);           // Sprite one frame rectangle height
     currentFrame = 0;
     currentLine = 0;
     frameCounter = 0;
     frameRec = { 0, 0, frameWidth, frameHeight };
-
 }
 
 void Boss::Update() 

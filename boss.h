@@ -13,6 +13,7 @@ public:
     void Update();
     void Draw();
     Rectangle GetRectangle();
+    void Init(bool reset = false);
     
     int health = 15;
     Vector2 position;
