@@ -6,14 +6,20 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add sources
-set(SOURCES
-    main.cpp
-    player.cpp
-    obstacle.cpp
-    bullet.cpp
-    enemy.cpp
-    boss.cpp
-)
+# set(SOURCES
+#     main.cpp
+#     player.cpp
+#     obstacle.cpp
+#     bullet.cpp
+#     enemy.cpp
+#     boss.cpp
+# )
+
+# Add all .cpp files from src/ automatically
+file(GLOB SOURCES "src/*.cpp")
+
+include_directories(include)
+
 
 # Find Raylib
 if(WIN32)

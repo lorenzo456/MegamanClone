@@ -266,6 +266,15 @@ MyGame_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 MyGame_SOURCE_DIR:STATIC=C:/Development/Games/MegamanClone
 
+//Value Computed by CMake
+Project_BINARY_DIR:STATIC=C:/Development/Games/MegamanClone/build
+
+//Value Computed by CMake
+Project_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Project_SOURCE_DIR:STATIC=C:/Development/Games/MegamanClone
+
 
 ########################
 # INTERNAL cache entries

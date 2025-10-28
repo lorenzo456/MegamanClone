@@ -128,149 +128,149 @@ MyGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/build
 .PHONY : MyGame/fast
 
-boss.obj: boss.cpp.obj
-.PHONY : boss.obj
+src/boss.obj: src/boss.cpp.obj
+.PHONY : src/boss.obj
 
 # target to build an object file
-boss.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/boss.cpp.obj
-.PHONY : boss.cpp.obj
+src/boss.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/boss.cpp.obj
+.PHONY : src/boss.cpp.obj
 
-boss.i: boss.cpp.i
-.PHONY : boss.i
+src/boss.i: src/boss.cpp.i
+.PHONY : src/boss.i
 
 # target to preprocess a source file
-boss.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/boss.cpp.i
-.PHONY : boss.cpp.i
+src/boss.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/boss.cpp.i
+.PHONY : src/boss.cpp.i
 
-boss.s: boss.cpp.s
-.PHONY : boss.s
+src/boss.s: src/boss.cpp.s
+.PHONY : src/boss.s
 
 # target to generate assembly for a file
-boss.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/boss.cpp.s
-.PHONY : boss.cpp.s
+src/boss.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/boss.cpp.s
+.PHONY : src/boss.cpp.s
 
-bullet.obj: bullet.cpp.obj
-.PHONY : bullet.obj
+src/bullet.obj: src/bullet.cpp.obj
+.PHONY : src/bullet.obj
 
 # target to build an object file
-bullet.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/bullet.cpp.obj
-.PHONY : bullet.cpp.obj
+src/bullet.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/bullet.cpp.obj
+.PHONY : src/bullet.cpp.obj
 
-bullet.i: bullet.cpp.i
-.PHONY : bullet.i
+src/bullet.i: src/bullet.cpp.i
+.PHONY : src/bullet.i
 
 # target to preprocess a source file
-bullet.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/bullet.cpp.i
-.PHONY : bullet.cpp.i
+src/bullet.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/bullet.cpp.i
+.PHONY : src/bullet.cpp.i
 
-bullet.s: bullet.cpp.s
-.PHONY : bullet.s
+src/bullet.s: src/bullet.cpp.s
+.PHONY : src/bullet.s
 
 # target to generate assembly for a file
-bullet.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/bullet.cpp.s
-.PHONY : bullet.cpp.s
+src/bullet.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/bullet.cpp.s
+.PHONY : src/bullet.cpp.s
 
-enemy.obj: enemy.cpp.obj
-.PHONY : enemy.obj
+src/enemy.obj: src/enemy.cpp.obj
+.PHONY : src/enemy.obj
 
 # target to build an object file
-enemy.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/enemy.cpp.obj
-.PHONY : enemy.cpp.obj
+src/enemy.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/enemy.cpp.obj
+.PHONY : src/enemy.cpp.obj
 
-enemy.i: enemy.cpp.i
-.PHONY : enemy.i
+src/enemy.i: src/enemy.cpp.i
+.PHONY : src/enemy.i
 
 # target to preprocess a source file
-enemy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/enemy.cpp.i
-.PHONY : enemy.cpp.i
+src/enemy.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/enemy.cpp.i
+.PHONY : src/enemy.cpp.i
 
-enemy.s: enemy.cpp.s
-.PHONY : enemy.s
+src/enemy.s: src/enemy.cpp.s
+.PHONY : src/enemy.s
 
 # target to generate assembly for a file
-enemy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/enemy.cpp.s
-.PHONY : enemy.cpp.s
+src/enemy.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/enemy.cpp.s
+.PHONY : src/enemy.cpp.s
 
-main.obj: main.cpp.obj
-.PHONY : main.obj
+src/main.obj: src/main.cpp.obj
+.PHONY : src/main.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+src/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/main.cpp.obj
+.PHONY : src/main.cpp.obj
 
-main.i: main.cpp.i
-.PHONY : main.i
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
-obstacle.obj: obstacle.cpp.obj
-.PHONY : obstacle.obj
+src/obstacle.obj: src/obstacle.cpp.obj
+.PHONY : src/obstacle.obj
 
 # target to build an object file
-obstacle.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/obstacle.cpp.obj
-.PHONY : obstacle.cpp.obj
+src/obstacle.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/obstacle.cpp.obj
+.PHONY : src/obstacle.cpp.obj
 
-obstacle.i: obstacle.cpp.i
-.PHONY : obstacle.i
+src/obstacle.i: src/obstacle.cpp.i
+.PHONY : src/obstacle.i
 
 # target to preprocess a source file
-obstacle.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/obstacle.cpp.i
-.PHONY : obstacle.cpp.i
+src/obstacle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/obstacle.cpp.i
+.PHONY : src/obstacle.cpp.i
 
-obstacle.s: obstacle.cpp.s
-.PHONY : obstacle.s
+src/obstacle.s: src/obstacle.cpp.s
+.PHONY : src/obstacle.s
 
 # target to generate assembly for a file
-obstacle.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/obstacle.cpp.s
-.PHONY : obstacle.cpp.s
+src/obstacle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/obstacle.cpp.s
+.PHONY : src/obstacle.cpp.s
 
-player.obj: player.cpp.obj
-.PHONY : player.obj
+src/player.obj: src/player.cpp.obj
+.PHONY : src/player.obj
 
 # target to build an object file
-player.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/player.cpp.obj
-.PHONY : player.cpp.obj
+src/player.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/player.cpp.obj
+.PHONY : src/player.cpp.obj
 
-player.i: player.cpp.i
-.PHONY : player.i
+src/player.i: src/player.cpp.i
+.PHONY : src/player.i
 
 # target to preprocess a source file
-player.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/player.cpp.i
-.PHONY : player.cpp.i
+src/player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/player.cpp.i
+.PHONY : src/player.cpp.i
 
-player.s: player.cpp.s
-.PHONY : player.s
+src/player.s: src/player.cpp.s
+.PHONY : src/player.s
 
 # target to generate assembly for a file
-player.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/player.cpp.s
-.PHONY : player.cpp.s
+src/player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/src/player.cpp.s
+.PHONY : src/player.cpp.s
 
 # Help Target
 help:
@@ -281,24 +281,24 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... MyGame
-	@echo ... boss.obj
-	@echo ... boss.i
-	@echo ... boss.s
-	@echo ... bullet.obj
-	@echo ... bullet.i
-	@echo ... bullet.s
-	@echo ... enemy.obj
-	@echo ... enemy.i
-	@echo ... enemy.s
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
-	@echo ... obstacle.obj
-	@echo ... obstacle.i
-	@echo ... obstacle.s
-	@echo ... player.obj
-	@echo ... player.i
-	@echo ... player.s
+	@echo ... src/boss.obj
+	@echo ... src/boss.i
+	@echo ... src/boss.s
+	@echo ... src/bullet.obj
+	@echo ... src/bullet.i
+	@echo ... src/bullet.s
+	@echo ... src/enemy.obj
+	@echo ... src/enemy.i
+	@echo ... src/enemy.s
+	@echo ... src/main.obj
+	@echo ... src/main.i
+	@echo ... src/main.s
+	@echo ... src/obstacle.obj
+	@echo ... src/obstacle.i
+	@echo ... src/obstacle.s
+	@echo ... src/player.obj
+	@echo ... src/player.i
+	@echo ... src/player.s
 .PHONY : help
 
 

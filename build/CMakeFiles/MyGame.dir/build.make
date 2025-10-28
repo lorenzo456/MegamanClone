@@ -71,114 +71,114 @@ include CMakeFiles/MyGame.dir/flags.make
 CMakeFiles/MyGame.dir/codegen:
 .PHONY : CMakeFiles/MyGame.dir/codegen
 
-CMakeFiles/MyGame.dir/main.cpp.obj: CMakeFiles/MyGame.dir/flags.make
-CMakeFiles/MyGame.dir/main.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
-CMakeFiles/MyGame.dir/main.cpp.obj: C:/Development/Games/MegamanClone/main.cpp
-CMakeFiles/MyGame.dir/main.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MyGame.dir/main.cpp.obj"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/main.cpp.obj -MF CMakeFiles\MyGame.dir\main.cpp.obj.d -o CMakeFiles\MyGame.dir\main.cpp.obj -c C:\Development\Games\MegamanClone\main.cpp
+CMakeFiles/MyGame.dir/src/boss.cpp.obj: CMakeFiles/MyGame.dir/flags.make
+CMakeFiles/MyGame.dir/src/boss.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
+CMakeFiles/MyGame.dir/src/boss.cpp.obj: C:/Development/Games/MegamanClone/src/boss.cpp
+CMakeFiles/MyGame.dir/src/boss.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MyGame.dir/src/boss.cpp.obj"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/src/boss.cpp.obj -MF CMakeFiles\MyGame.dir\src\boss.cpp.obj.d -o CMakeFiles\MyGame.dir\src\boss.cpp.obj -c C:\Development\Games\MegamanClone\src\boss.cpp
 
-CMakeFiles/MyGame.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/main.cpp.i"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\main.cpp > CMakeFiles\MyGame.dir\main.cpp.i
+CMakeFiles/MyGame.dir/src/boss.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/src/boss.cpp.i"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\src\boss.cpp > CMakeFiles\MyGame.dir\src\boss.cpp.i
 
-CMakeFiles/MyGame.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/main.cpp.s"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\main.cpp -o CMakeFiles\MyGame.dir\main.cpp.s
+CMakeFiles/MyGame.dir/src/boss.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/src/boss.cpp.s"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\src\boss.cpp -o CMakeFiles\MyGame.dir\src\boss.cpp.s
 
-CMakeFiles/MyGame.dir/player.cpp.obj: CMakeFiles/MyGame.dir/flags.make
-CMakeFiles/MyGame.dir/player.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
-CMakeFiles/MyGame.dir/player.cpp.obj: C:/Development/Games/MegamanClone/player.cpp
-CMakeFiles/MyGame.dir/player.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MyGame.dir/player.cpp.obj"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/player.cpp.obj -MF CMakeFiles\MyGame.dir\player.cpp.obj.d -o CMakeFiles\MyGame.dir\player.cpp.obj -c C:\Development\Games\MegamanClone\player.cpp
+CMakeFiles/MyGame.dir/src/bullet.cpp.obj: CMakeFiles/MyGame.dir/flags.make
+CMakeFiles/MyGame.dir/src/bullet.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
+CMakeFiles/MyGame.dir/src/bullet.cpp.obj: C:/Development/Games/MegamanClone/src/bullet.cpp
+CMakeFiles/MyGame.dir/src/bullet.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MyGame.dir/src/bullet.cpp.obj"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/src/bullet.cpp.obj -MF CMakeFiles\MyGame.dir\src\bullet.cpp.obj.d -o CMakeFiles\MyGame.dir\src\bullet.cpp.obj -c C:\Development\Games\MegamanClone\src\bullet.cpp
 
-CMakeFiles/MyGame.dir/player.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/player.cpp.i"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\player.cpp > CMakeFiles\MyGame.dir\player.cpp.i
+CMakeFiles/MyGame.dir/src/bullet.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/src/bullet.cpp.i"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\src\bullet.cpp > CMakeFiles\MyGame.dir\src\bullet.cpp.i
 
-CMakeFiles/MyGame.dir/player.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/player.cpp.s"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\player.cpp -o CMakeFiles\MyGame.dir\player.cpp.s
+CMakeFiles/MyGame.dir/src/bullet.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/src/bullet.cpp.s"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\src\bullet.cpp -o CMakeFiles\MyGame.dir\src\bullet.cpp.s
 
-CMakeFiles/MyGame.dir/obstacle.cpp.obj: CMakeFiles/MyGame.dir/flags.make
-CMakeFiles/MyGame.dir/obstacle.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
-CMakeFiles/MyGame.dir/obstacle.cpp.obj: C:/Development/Games/MegamanClone/obstacle.cpp
-CMakeFiles/MyGame.dir/obstacle.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MyGame.dir/obstacle.cpp.obj"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/obstacle.cpp.obj -MF CMakeFiles\MyGame.dir\obstacle.cpp.obj.d -o CMakeFiles\MyGame.dir\obstacle.cpp.obj -c C:\Development\Games\MegamanClone\obstacle.cpp
+CMakeFiles/MyGame.dir/src/enemy.cpp.obj: CMakeFiles/MyGame.dir/flags.make
+CMakeFiles/MyGame.dir/src/enemy.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
+CMakeFiles/MyGame.dir/src/enemy.cpp.obj: C:/Development/Games/MegamanClone/src/enemy.cpp
+CMakeFiles/MyGame.dir/src/enemy.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MyGame.dir/src/enemy.cpp.obj"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/src/enemy.cpp.obj -MF CMakeFiles\MyGame.dir\src\enemy.cpp.obj.d -o CMakeFiles\MyGame.dir\src\enemy.cpp.obj -c C:\Development\Games\MegamanClone\src\enemy.cpp
 
-CMakeFiles/MyGame.dir/obstacle.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/obstacle.cpp.i"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\obstacle.cpp > CMakeFiles\MyGame.dir\obstacle.cpp.i
+CMakeFiles/MyGame.dir/src/enemy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/src/enemy.cpp.i"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\src\enemy.cpp > CMakeFiles\MyGame.dir\src\enemy.cpp.i
 
-CMakeFiles/MyGame.dir/obstacle.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/obstacle.cpp.s"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\obstacle.cpp -o CMakeFiles\MyGame.dir\obstacle.cpp.s
+CMakeFiles/MyGame.dir/src/enemy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/src/enemy.cpp.s"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\src\enemy.cpp -o CMakeFiles\MyGame.dir\src\enemy.cpp.s
 
-CMakeFiles/MyGame.dir/bullet.cpp.obj: CMakeFiles/MyGame.dir/flags.make
-CMakeFiles/MyGame.dir/bullet.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
-CMakeFiles/MyGame.dir/bullet.cpp.obj: C:/Development/Games/MegamanClone/bullet.cpp
-CMakeFiles/MyGame.dir/bullet.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MyGame.dir/bullet.cpp.obj"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/bullet.cpp.obj -MF CMakeFiles\MyGame.dir\bullet.cpp.obj.d -o CMakeFiles\MyGame.dir\bullet.cpp.obj -c C:\Development\Games\MegamanClone\bullet.cpp
+CMakeFiles/MyGame.dir/src/main.cpp.obj: CMakeFiles/MyGame.dir/flags.make
+CMakeFiles/MyGame.dir/src/main.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
+CMakeFiles/MyGame.dir/src/main.cpp.obj: C:/Development/Games/MegamanClone/src/main.cpp
+CMakeFiles/MyGame.dir/src/main.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MyGame.dir/src/main.cpp.obj"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/src/main.cpp.obj -MF CMakeFiles\MyGame.dir\src\main.cpp.obj.d -o CMakeFiles\MyGame.dir\src\main.cpp.obj -c C:\Development\Games\MegamanClone\src\main.cpp
 
-CMakeFiles/MyGame.dir/bullet.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/bullet.cpp.i"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\bullet.cpp > CMakeFiles\MyGame.dir\bullet.cpp.i
+CMakeFiles/MyGame.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/src/main.cpp.i"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\src\main.cpp > CMakeFiles\MyGame.dir\src\main.cpp.i
 
-CMakeFiles/MyGame.dir/bullet.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/bullet.cpp.s"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\bullet.cpp -o CMakeFiles\MyGame.dir\bullet.cpp.s
+CMakeFiles/MyGame.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/src/main.cpp.s"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\src\main.cpp -o CMakeFiles\MyGame.dir\src\main.cpp.s
 
-CMakeFiles/MyGame.dir/enemy.cpp.obj: CMakeFiles/MyGame.dir/flags.make
-CMakeFiles/MyGame.dir/enemy.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
-CMakeFiles/MyGame.dir/enemy.cpp.obj: C:/Development/Games/MegamanClone/enemy.cpp
-CMakeFiles/MyGame.dir/enemy.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MyGame.dir/enemy.cpp.obj"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/enemy.cpp.obj -MF CMakeFiles\MyGame.dir\enemy.cpp.obj.d -o CMakeFiles\MyGame.dir\enemy.cpp.obj -c C:\Development\Games\MegamanClone\enemy.cpp
+CMakeFiles/MyGame.dir/src/obstacle.cpp.obj: CMakeFiles/MyGame.dir/flags.make
+CMakeFiles/MyGame.dir/src/obstacle.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
+CMakeFiles/MyGame.dir/src/obstacle.cpp.obj: C:/Development/Games/MegamanClone/src/obstacle.cpp
+CMakeFiles/MyGame.dir/src/obstacle.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MyGame.dir/src/obstacle.cpp.obj"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/src/obstacle.cpp.obj -MF CMakeFiles\MyGame.dir\src\obstacle.cpp.obj.d -o CMakeFiles\MyGame.dir\src\obstacle.cpp.obj -c C:\Development\Games\MegamanClone\src\obstacle.cpp
 
-CMakeFiles/MyGame.dir/enemy.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/enemy.cpp.i"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\enemy.cpp > CMakeFiles\MyGame.dir\enemy.cpp.i
+CMakeFiles/MyGame.dir/src/obstacle.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/src/obstacle.cpp.i"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\src\obstacle.cpp > CMakeFiles\MyGame.dir\src\obstacle.cpp.i
 
-CMakeFiles/MyGame.dir/enemy.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/enemy.cpp.s"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\enemy.cpp -o CMakeFiles\MyGame.dir\enemy.cpp.s
+CMakeFiles/MyGame.dir/src/obstacle.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/src/obstacle.cpp.s"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\src\obstacle.cpp -o CMakeFiles\MyGame.dir\src\obstacle.cpp.s
 
-CMakeFiles/MyGame.dir/boss.cpp.obj: CMakeFiles/MyGame.dir/flags.make
-CMakeFiles/MyGame.dir/boss.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
-CMakeFiles/MyGame.dir/boss.cpp.obj: C:/Development/Games/MegamanClone/boss.cpp
-CMakeFiles/MyGame.dir/boss.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MyGame.dir/boss.cpp.obj"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/boss.cpp.obj -MF CMakeFiles\MyGame.dir\boss.cpp.obj.d -o CMakeFiles\MyGame.dir\boss.cpp.obj -c C:\Development\Games\MegamanClone\boss.cpp
+CMakeFiles/MyGame.dir/src/player.cpp.obj: CMakeFiles/MyGame.dir/flags.make
+CMakeFiles/MyGame.dir/src/player.cpp.obj: CMakeFiles/MyGame.dir/includes_CXX.rsp
+CMakeFiles/MyGame.dir/src/player.cpp.obj: C:/Development/Games/MegamanClone/src/player.cpp
+CMakeFiles/MyGame.dir/src/player.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Development\Games\MegamanClone\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MyGame.dir/src/player.cpp.obj"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/src/player.cpp.obj -MF CMakeFiles\MyGame.dir\src\player.cpp.obj.d -o CMakeFiles\MyGame.dir\src\player.cpp.obj -c C:\Development\Games\MegamanClone\src\player.cpp
 
-CMakeFiles/MyGame.dir/boss.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/boss.cpp.i"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\boss.cpp > CMakeFiles\MyGame.dir\boss.cpp.i
+CMakeFiles/MyGame.dir/src/player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/src/player.cpp.i"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Development\Games\MegamanClone\src\player.cpp > CMakeFiles\MyGame.dir\src\player.cpp.i
 
-CMakeFiles/MyGame.dir/boss.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/boss.cpp.s"
-	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\boss.cpp -o CMakeFiles\MyGame.dir\boss.cpp.s
+CMakeFiles/MyGame.dir/src/player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/src/player.cpp.s"
+	C:\msys64\ucrt64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Development\Games\MegamanClone\src\player.cpp -o CMakeFiles\MyGame.dir\src\player.cpp.s
 
 # Object files for target MyGame
 MyGame_OBJECTS = \
-"CMakeFiles/MyGame.dir/main.cpp.obj" \
-"CMakeFiles/MyGame.dir/player.cpp.obj" \
-"CMakeFiles/MyGame.dir/obstacle.cpp.obj" \
-"CMakeFiles/MyGame.dir/bullet.cpp.obj" \
-"CMakeFiles/MyGame.dir/enemy.cpp.obj" \
-"CMakeFiles/MyGame.dir/boss.cpp.obj"
+"CMakeFiles/MyGame.dir/src/boss.cpp.obj" \
+"CMakeFiles/MyGame.dir/src/bullet.cpp.obj" \
+"CMakeFiles/MyGame.dir/src/enemy.cpp.obj" \
+"CMakeFiles/MyGame.dir/src/main.cpp.obj" \
+"CMakeFiles/MyGame.dir/src/obstacle.cpp.obj" \
+"CMakeFiles/MyGame.dir/src/player.cpp.obj"
 
 # External object files for target MyGame
 MyGame_EXTERNAL_OBJECTS =
 
-MyGame.exe: CMakeFiles/MyGame.dir/main.cpp.obj
-MyGame.exe: CMakeFiles/MyGame.dir/player.cpp.obj
-MyGame.exe: CMakeFiles/MyGame.dir/obstacle.cpp.obj
-MyGame.exe: CMakeFiles/MyGame.dir/bullet.cpp.obj
-MyGame.exe: CMakeFiles/MyGame.dir/enemy.cpp.obj
-MyGame.exe: CMakeFiles/MyGame.dir/boss.cpp.obj
+MyGame.exe: CMakeFiles/MyGame.dir/src/boss.cpp.obj
+MyGame.exe: CMakeFiles/MyGame.dir/src/bullet.cpp.obj
+MyGame.exe: CMakeFiles/MyGame.dir/src/enemy.cpp.obj
+MyGame.exe: CMakeFiles/MyGame.dir/src/main.cpp.obj
+MyGame.exe: CMakeFiles/MyGame.dir/src/obstacle.cpp.obj
+MyGame.exe: CMakeFiles/MyGame.dir/src/player.cpp.obj
 MyGame.exe: CMakeFiles/MyGame.dir/build.make
 MyGame.exe: C:/raylib/lib/libraylib.a
 MyGame.exe: CMakeFiles/MyGame.dir/linkLibs.rsp
