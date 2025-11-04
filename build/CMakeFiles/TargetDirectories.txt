@@ -1,3 +1,0 @@
-C:/Development/Games/MegamanClone/build/CMakeFiles/MyGame.dir
-C:/Development/Games/MegamanClone/build/CMakeFiles/edit_cache.dir
-C:/Development/Games/MegamanClone/build/CMakeFiles/rebuild_cache.dir
